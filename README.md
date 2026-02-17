@@ -60,17 +60,6 @@ The website connects major business corridors in Gujarat, including Ahmedabad, S
 
 The application uses both MySQL and MongoDB databases:
 
-### MySQL Configuration
-- **Host**: localhost
-- **User**: root
-- **Password**: karan@05
-- **Database**: gujarat_transport
-
-### MongoDB Configuration
-- **Host**: localhost
-- **Port**: 27017
-- **Database**: gujarat_transport
-
 #### MongoDB Collections
 - **users**: User accounts with roles (admin/user)
 - **bus_bookings**: Bus booking records
@@ -140,14 +129,6 @@ python
    python app.py
    
 ```
-
-6. **Access the application**:
-   - Open your browser and go to `http://localhost:5000`
-
-## Default Admin Credentials
-
-- **Username**: admin
-- **Password**: karan@2004
 
 ## Usage
 
