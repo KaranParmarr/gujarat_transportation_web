@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Contact Queries | Admin Panel</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='adminpanel.css') }}"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      .contact-admin {
+        padding: 30px;
+        background: #f9fafb;
+        min-height: 100vh;
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      /* Header */
+      .contact-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+      }
+
+      .contact-header h2 {
+        font-size: 26px;
+        font-weight: 700;
+      }
+
+      .contact-total {
+        background: #ff6b00;
+        color: #fff;
+        padding: 8px 20px;
+        border-radius: 50px;
+        font-weight: 600;
+      }
+
+      /* Table */
+      .table-wrapper {
+        overflow-x: auto;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th {
+        background: #f3f4f6;
+        padding: 14px;
+        text-align: left;
+        font-size: 14px;
+      }
+
+      td {
+        padding: 14px;
+        border-bottom: 1px solid #eee;
+        font-size: 14px;
+      }
+
+      tr:hover {
+        background: #f9f9f9;
+      }
+
+      /* Pagination */
+      .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        gap: 10px;
+      }
+
+      .pagination button {
+        padding: 8px 14px;
+        border-radius: 8px;
+        border: none;
+        background: #e5e7eb;
+        cursor: pointer;
+      }
+
+      .pagination button.active {
+        background: #ff6b00;
+        color: white;
+      }
+
+      /* Mobile */
+      @media (max-width: 768px) {
+        th,
+        td {
+          font-size: 12px;
+          padding: 10px;
+        }
+        .contact-header {
+          flex-direction: column;
+          gap: 10px;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <img
+        src="{{ url_for('static', filename='img/admin-logo.png') }}"
+        alt="Logo"
+        class="logo"
+      />
+      <h2>Admin-Panel</h2>
+      <a href="/adminpanel"
+        ><i class="fa fa-chart-line"></i>
+        <span data-lang="dashboard">Dashboard</span></a
+      >
+      <a href="/bus-booking"
+        ><i class="fa fa-bus"></i> <span data-lang="bus">Bus Booking</span></a
+      >
+      <a href="/trucks-shipment"
+        ><i class="fa fa-truck"></i>
+        <span data-lang="truck">Trucks Shipment</span></a
+      >
+      <a href="/users"
+        ><i class="fa fa-users"></i>
+        <span data-lang="users">Manage Users</span></a
+      >
+      <a href="/queries" class="active"
+        ><i class="fa fa-message"></i>
+        <span data-lang="contact">Contact Queries</span></a
+      >
+      <a href="/logout"
+        ><i class="fa fa-right-from-bracket"></i>
+        <span data-lang="logout">Logout</span></a
+      >
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main">
+      <!-- TOP BAR -->
+      <div class="topbar">
+        <h1 data-lang="dashboard">Dashboard</h1>
+
+        <div class="top-controls">
+          <input type="text" id="tableSearch" placeholder="Search..." />
+          <i class="fa fa-bell"></i>
+
+          <div class="admin-menu">
+            <i class="fa fa-user"><span> Admin ▾</span></i>
+            <div class="admin-dropdown">
+              <a href="/profile"><i class="fa fa-user"></i> My Profile</a>
+              <a href="/mybookings"
+                ><i class="fa fa-briefcase"></i> My Bookings</a
+              >
+              <a href="/logout"
+                ><i class="fa fa-right-from-bracket"></i> Logout</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WELCOME -->
+      <div class="welcome-card">
+        <h2>🔰 Welcome to the Admin Dashboard 🔰</h2>
+        <p>
+          Manage all bookings, users, and revenue from one powerful control
+          panel
+        </p>
+      </div>
+
+      <section class="contact-admin">
+        <!-- Header Row -->
+        <div class="contact-header">
+          <h2>Contact Messages</h2>
+          <div class="contact-total">
+            Total: <span id="totalContacts">0</span>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-wrapper">
+          <table class="search-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Username</th>
+                <th>Full Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Bus Type</th>
+                <th>Truck Type</th>
+                <th>Message</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+
+            <tbody id="contactTable"></tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination" id="pagination"></div>
+      </section>
+    </div>
+    <script>
+      const API_URL = "https://sheetdb.io/api/v1/1si1ndi4a8p8v";
+
+      const table = document.getElementById("contactTable");
+      const total = document.getElementById("totalContacts");
+      const pagination = document.getElementById("pagination");
+
+      let contacts = [];
+      let currentPage = 1;
+      const perPage = 10;
+
+      async function loadContacts() {
+        try {
+          const res = await fetch(API_URL);
+          const data = await res.json();
+
+          // Add auto date if not present
+          contacts = data
+            .map((row) => ({
+              ...row,
+              _date: row.DATE || new Date().toLocaleString(),
+            }))
+            .reverse();
+
+          total.innerText = contacts.length;
+          renderTable();
+          renderPagination();
+        } catch (err) {
+          console.error("SheetDB Error:", err);
+        }
+      }
+
+      function renderTable() {
+        table.innerHTML = "";
+
+        const start = (currentPage - 1) * perPage;
+        const end = start + perPage;
+        const pageData = contacts.slice(start, end);
+
+        pageData.forEach((row, i) => {
+          table.innerHTML += `
+      <tr>
+        <td>${start + i + 1}</td>
+        <td>${(row.NAME || "").split(" ")[0]}</td>
+        <td>${row.NAME || "-"}</td>
+        <td>${row.PHONE || "-"}</td>
+        <td>${row.EMAIL || "-"}</td>
+        <td>${row.BUS || "-"}</td>
+        <td>${row.TRUCK || "-"}</td>
+        <td>${row.MESSAGE || "-"}</td>
+        <td>${row._date}</td>
+      </tr>
+    `;
+        });
+      }
+
+      function renderPagination() {
+        pagination.innerHTML = "";
+        const pages = Math.ceil(contacts.length / perPage);
+
+        for (let i = 1; i <= pages; i++) {
+          pagination.innerHTML += `
+      <button onclick="goPage(${i})"
+        style="padding:8px 14px; margin:4px; border-radius:8px; border:none; background:${i === currentPage ? "#ff7a18" : "#ddd"}; color:${i === currentPage ? "white" : "black"}; cursor:pointer">
+        ${i}
+      </button>
+    `;
+        }
+      }
+
+      function goPage(page) {
+        currentPage = page;
+        renderTable();
+        renderPagination();
+      }
+
+      /* Auto refresh every 10 seconds */
+      setInterval(loadContacts, 10000);
+
+      /* First Load */
+      loadContacts();
+    </script>
+    <script>
+      (function () {
+        const searchInput = document.getElementById("tableSearch");
+        const tables = document.querySelectorAll(".search-table");
+        searchInput.addEventListener("keyup", function () {
+          const value = this.value.toLowerCase().trim();
+
+          tables.forEach((table) => {
+            const rows = table.querySelectorAll("tbody tr");
+
+            rows.forEach((row) => {
+              row.style.display = row.innerText.toLowerCase().includes(value)
+                ? ""
+                : "none";
+            });
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>

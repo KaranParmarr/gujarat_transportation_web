@@ -1,0 +1,24 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+psycopg2 = "*"
+psycopg2-binary = "*"
+flask-sqlalchemy = "*"
+gunicorn = "*"
+flask-marshmallow = "*"
+marshmallow-sqlalchemy = "*"
+flask-login = "*"
+matplotlib = "*"
+pandas = "*"
+bokeh = "*"
+messagebox = "*"
+pymsgbox = "*"
+autopep8 = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.14"

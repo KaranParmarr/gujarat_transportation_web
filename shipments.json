@@ -1,0 +1,62 @@
+[
+    {
+        "username": "apeksha.mehta",
+        "fullname": "Apeksha Mehta",
+        "email": "mehtaapeksha@gmail.com",
+        "contact": "9082791189",
+        "distance": "686",
+        "pickup": "Mumbai",
+        "delivery": "Goa",
+        "insurance": "Premium",
+        "cargo": "1245",
+        "service": "Container",
+        "truck": "Container",
+        "payment": "41160",
+        "date": "11-02-2026 21:37"
+    },
+    {
+        "username": "darji_rohann",
+        "fullname": "Rohan Darji",
+        "email": "darjirohan@gmail.com",
+        "contact": "8291380781",
+        "distance": "1625",
+        "pickup": "Ahmedabad",
+        "delivery": "Delhi",
+        "insurance": "Full",
+        "cargo": "2586",
+        "service": "Flatbed-Trailer",
+        "truck": "Large Truck",
+        "payment": "97500",
+        "date": "12-02-2026 09:50"
+    },
+    {
+        "username": "admin",
+        "fullname": "Karan Parmar",
+        "email": "official.karanparmar@gmail.com",
+        "contact": "8976645502",
+        "distance": "827",
+        "pickup": "Mumbai",
+        "delivery": "Bhuj ,Gujarat",
+        "insurance": "Premium",
+        "cargo": "4000",
+        "service": "Dumper",
+        "truck": "Large Truck",
+        "payment": "49620",
+        "date": "12-02-2026 11:49"
+    },
+    {
+        "username": "yug.pply",
+        "fullname": "Yug Popaliya",
+        "email": "popaliyayug06@gmail.com",
+        "contact": "8454970200",
+        "distance": "664",
+        "pickup": "Borivali",
+        "delivery": "ujjain",
+        "insurance": "Basic",
+        "cargo": "932",
+        "service": "Logistics",
+        "truck": "Medium Truck",
+        "payment": "106240",
+        "date": "15-02-2026 12:22"
+    }
+]

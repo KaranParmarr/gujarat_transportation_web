@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Profile | Gujarat Transportation</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='main.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='profile.css') }}"
+    />
+  </head>
+
+  <body class="bg-slate-50 font-sans">
+    <!-- NavBar Kinks Section -->
+    <header class="navbar">
+      <div class="navbar-container">
+        <!-- Logo -->
+        <a href="/index.html">
+          <img
+            src="{{ url_for('static', filename='img/logo-gujrat.png') }}"
+            alt="Logo"
+            class="logo"
+          />
+        </a>
+
+        <!-- Mobile Menu Toggle (Android & iPhone only) -->
+        <button class="menu-toggle" id="menuToggle">☰</button>
+
+        <!-- Desktop Navigation -->
+        <nav class="desktop-navigation">
+          <a href="/" class="drawer-link">Home</a>
+          <a href="/service" class="drawer-link">Services</a>
+          <a href="/gallery" class="drawer-link">Gallery</a>
+          <a href="/booking" class="drawer-link">Book</a>
+          <a href="/about" class="drawer-link">About Us</a>
+          <a href="/contact" class="drawer-link">Contact</a>
+          <a href="/booking" class="drawer-btn">Book Now</a>
+          <!-- 🔐 ADMIN LOGIN (HIDDEN FOR USERS) -->
+          <!-- ================= USER STATE & ACCOUNT SECTION ================= -->
+          <section id="user-auth-state" class="auth-wrapper">
+            {% if session.user %}
+            <div class="account-box" id="accountBox">
+              <button class="account-btn" id="accountBtn">
+                {{ session.user.username }} ▾
+              </button>
+
+              <div class="account-dropdown" id="accountDropdown">
+                <a href="/profile"
+                  ><i class="fa-regular fa-user-circle"></i>My Profile</a
+                >
+                <a href="/mybookings"
+                  ><i class="fa-solid fa-briefcase"></i>My Bookings</a
+                >
+
+                {% if user.role == "admin" %}
+                <a href="/adminpanel"
+                  ><i class="fa-solid fa-sliders"></i>Admin Panel</a
+                >
+                {% endif %}
+
+                <a href="/logout" class="logout"
+                  ><i class="fa-solid fa-right-from-bracket"></i>Logout</a
+                >
+              </div>
+            </div>
+            {% else %}
+            <button
+              class="login-btn-nav"
+              id="openLoginModal"
+              onclick="openLogin()"
+            >
+              Login / Sign Up
+            </button>
+            {% endif %}
+          </section>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Mobile Drawer Menu -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <button class="drawer-close" id="drawerClose">✕</button>
+
+      <a href="/">Home</a>
+      <a href="/service">Services</a>
+      <a href="/gallery">Gallery</a>
+      <a href="/booking">Book</a>
+      <a href="/about">About Us</a>
+      <a href="/contact">Contact</a>
+      <a href="/booking" class="drawer-btn">Book Now</a>
+    </div>
+
+    <!-- Profile Section -->
+    <div class="profile-container">
+      <!-- LEFT SIDEBAR -->
+      <div class="sidebar">
+        <div class="user-box">
+          <i class="fa-solid fa-user-circle"></i>
+          <h3>{{ user.username }}</h3>
+        </div>
+
+        <a href="/mybookings">
+          <i class="fa-solid fa-briefcase"></i> My Trips
+        </a>
+
+        <a href="/profile" class="active">
+          <i class="fa-solid fa-user"></i> My Profile
+        </a>
+      </div>
+
+      <!-- MAIN PROFILE -->
+      <div class="profile-content">
+        <div class="profile-card">
+          <div class="profile-header">
+            <h2>My Profile</h2>
+            <button class="edit-btn">EDIT</button>
+          </div>
+
+          <div class="profile-grid">
+            <div>
+              <label>Your Name</label>
+              <p>{{ session.user.username }}</p>
+            </div>
+
+            <div>
+              <label>Role</label>
+              <p>{{ session.user.role }}</p>
+            </div>
+
+            <div>
+              <label>Email</label>
+              <p>{{ session.user.email }}</p>
+            </div>
+
+            <div>
+              <label>Phone</label>
+              <p>Not Set</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Profile Section End -->
+    <!-- Footer Section -->
+    <footer class="footer-section">
+      <div class="footer-container">
+        <div class="footer-grid">
+          <!-- Brand -->
+          <div class="footer-brand">
+            <h2 class="footer-logo">
+              <img
+                src="{{ url_for('static', filename='/img/footer-logo.png') }}"
+                alt="Gujrat Transport Logo"
+                class="footer-logo-img"
+              />
+            </h2>
+
+            <p class="footer-text">
+              Your trusted partner for comfortable bus travel and reliable truck
+              transportation services across the nation.
+            </p>
+
+            <div class="social-icons">
+              <a href="#"><span>🌐</span></a>
+              <a href="#"><span>🐦</span></a>
+              <a href="#"><span>📸</span></a>
+              <a href="#"><span>💼</span></a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="footer-links">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="/index">Home</a></li>
+              <li><a href="/about">About Us</a></li>
+              <li><a href="/gallery">Gallery</a></li>
+              <li><a href="/service">Services</a></li>
+              <li><a href="/booking">Book Now</a></li>
+              <li><a href="/contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <!-- Services -->
+          <div class="footer-services">
+            <h3>Our Services</h3>
+            <ul>
+              <li><a href="/service">Sleeper Coach Bus</a></li>
+              <li><a href="/service">A/C Sleeper Coach</a></li>
+              <li><a href="/service">Heavy Truck Transport</a></li>
+              <li><a href="/service">Container Services</a></li>
+              <li><a href="/service">Express Delivery</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact -->
+          <div class="footer-contact">
+            <h3>Contact Us</h3>
+            <ul>
+              <li>
+                <a href="https://maps.google.com" target="_blank">
+                  📍 05 Transport Hub, Highway Road, Ahmedabad, Gujarat 700007
+                </a>
+              </li>
+              <li>
+                <a href="tel:+918976645502"> 📞 +91 897-664-5502 </a>
+              </li>
+              <li>
+                <a href="mailto:official.karanparmar@gmail.com">
+                  ✉️ official.karanparmar@gmail.com
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <hr class="footer-divider" />
+        <div class="footer-bottom">
+          <p>© 2025 Gujrat Transport. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <a
+      href="https://wa.me/918976645502?text=Hi%20I%20want%20a%20booking%20service"
+      class="whatsapp-float"
+      target="_blank"
+    >
+      <i class="fab fa-whatsapp"></i>
+      <span>WhatsApp</span>
+    </a>
+    <!-- 🔹 LOGIN MODAL SCRIPT (ADDED) -->
+    <script>
+      const overlay = document.getElementById("loginOverlay");
+
+      /* ===========================
+       FIRST VISIT CHECK
+    =========================== */
+      document.addEventListener("DOMContentLoaded", () => {
+        const firstVisit = localStorage.getItem("firstVisitDone");
+
+        if (!firstVisit) {
+          // Show modal on first visit
+          overlay.style.display = "flex";
+          document.body.classList.add("modal-open");
+
+          // Mark as visited
+          localStorage.setItem("firstVisitDone", "true");
+        } else {
+          // Hide on refresh / next visits
+          overlay.style.display = "none";
+          document.body.classList.remove("modal-open");
+        }
+      });
+
+      function closeLogin() {
+        overlay.style.display = "none";
+        document.body.classList.remove("modal-open");
+      }
+
+      function openLogin() {
+        overlay.style.display = "flex";
+        document.body.classList.add("modal-open");
+      }
+    </script>
+
+    <!-- Scripts -->
+    <script>
+      lucide.createIcons();
+
+      // Menu Toggle Logic
+      const menuToggle = document.getElementById("menuToggle");
+      const closeMenu = document.getElementById("closeMenu");
+      const navMenu = document.getElementById("navMenu");
+      const menuOverlay = document.getElementById("menuOverlay");
+
+      const openDrawer = () => {
+        navMenu.classList.add("is-open");
+        menuOverlay.classList.add("is-visible");
+        document.body.style.overflow = "hidden"; // Prevent scrolling when open
+      };
+
+      const closeDrawer = () => {
+        navMenu.classList.remove("is-open");
+        menuOverlay.classList.remove("is-visible");
+        document.body.style.overflow = ""; // Restore scrolling
+      };
+
+      menuToggle.addEventListener("click", openDrawer);
+      closeMenu.addEventListener("click", closeDrawer);
+      menuOverlay.addEventListener("click", closeDrawer);
+
+      // Intersection Observer for animations
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("show");
+              entry.target.classList.add("active");
+            }
+          });
+        },
+        { threshold: 0.2 },
+      );
+
+      document
+        .querySelectorAll(".scroll-animate")
+        .forEach((el) => observer.observe(el));
+      document
+        .querySelectorAll(".scroll-slide")
+        .forEach((el) => observer.observe(el));
+    </script>
+    <script>
+      const drawer = document.getElementById("mobileDrawer");
+      const closeBtn = document.getElementById("drawerClose");
+
+      menuToggle.addEventListener("click", () => {
+        drawer.classList.add("active");
+      });
+
+      closeBtn.addEventListener("click", () => {
+        drawer.classList.remove("active");
+      });
+    </script>
+
+    <script>
+      const overlay = document.getElementById("loginOverlay");
+
+      /* ===========================
+       FIRST VISIT CHECK
+    =========================== */
+      document.addEventListener("DOMContentLoaded", () => {
+        const firstVisit = localStorage.getItem("firstVisitDone");
+
+        if (!firstVisit) {
+          // Show modal on first visit
+          overlay.style.display = "flex";
+          document.body.classList.add("modal-open");
+
+          // Mark as visited
+          localStorage.setItem("firstVisitDone", "true");
+        } else {
+          // Hide on refresh / next visits
+          overlay.style.display = "none";
+          document.body.classList.remove("modal-open");
+        }
+      });
+
+      function closeLogin() {
+        overlay.style.display = "none";
+        document.body.classList.remove("modal-open");
+      }
+
+      function openLogin() {
+        overlay.style.display = "flex";
+        document.body.classList.add("modal-open");
+      }
+    </script>
+    <script>
+      const accountBtn = document.getElementById("accountBtn");
+      const accountDropdown = document.getElementById("accountDropdown");
+
+      if (accountBtn) {
+        accountBtn.addEventListener("click", function (e) {
+          e.stopPropagation();
+
+          if (accountDropdown.style.display === "flex") {
+            accountDropdown.style.display = "none";
+          } else {
+            accountDropdown.style.display = "flex";
+          }
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener("click", function () {
+          accountDropdown.style.display = "none";
+        });
+      }
+    </script>
+    <!-- ================= BOTTOM NAVIGATION ================= -->
+    <nav class="bottom-nav">
+      <a href="/" class="bottom-nav__item">
+        <i class="fa fa-house"></i>
+        <span>Home</span>
+      </a>
+
+      <a href="/booking" class="bottom-nav__item">
+        <i class="fa fa-bus"></i>
+        <span>Bus</span>
+      </a>
+
+      <a href="/cargotransport" class="bottom-nav__item">
+        <i class="fa fa-truck"></i>
+        <span>Truck</span>
+      </a>
+
+      <a href="/profile" class="bottom-nav__item">
+        <i class="fa fa-user"></i>
+        <span>Account</span>
+      </a>
+    </nav>
+    <script>
+      (function () {
+        const path = window.location.pathname;
+        document.querySelectorAll(".bottom-nav__item").forEach((link) => {
+          if (link.getAttribute("href") === path) {
+            link.classList.add("active");
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

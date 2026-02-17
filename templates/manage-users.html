@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Manage-User</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='adminpanel.css') }}"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+
+  <body>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <img
+        src="{{ url_for('static', filename='img/admin-logo.png') }}"
+        alt="Logo"
+        class="logo"
+      />
+      <h2>Admin-Panel</h2>
+      <a href="/adminpanel"
+        ><i class="fa fa-chart-line"></i>
+        <span data-lang="dashboard">Dashboard</span></a
+      >
+      <a href="/bus-booking"
+        ><i class="fa fa-bus"></i> <span data-lang="bus">Bus Booking</span></a>
+      <a href="/trucks-shipment"
+        ><i class="fa fa-truck"></i>
+        <span data-lang="truck">Trucks Shipment</span></a
+      >
+      <a href="/users" class="active"
+        ><i class="fa fa-users"></i>
+        <span data-lang="users">Manage Users</span></a
+      >
+      <a href="/queries"
+        ><i class="fa fa-message"></i>
+        <span data-lang="contact">Contact Queries</span></a
+      >
+      <a href="/logout"
+        ><i class="fa fa-right-from-bracket"></i>
+        <span data-lang="logout">Logout</span></a
+      >
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main">
+      <!-- TOP BAR -->
+      <div class="topbar">
+        <h1 data-lang="dashboard">Dashboard</h1>
+
+        <div class="top-controls">
+          <input type="text" id="tableSearch" placeholder="Search..." />
+          <i class="fa fa-bell"></i>
+
+          <div class="admin-menu">
+            <i class="fa fa-user"><span> Admin ▾</span></i>
+            <div class="admin-dropdown">
+              <a href="/profile"><i class="fa fa-user"></i> My Profile</a>
+              <a href="/mybookings"
+                ><i class="fa fa-briefcase"></i> My Bookings</a
+              >
+              <a href="/logout"
+                ><i class="fa fa-right-from-bracket"></i> Logout</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- WELCOME -->
+      <div class="welcome-card">
+        <h2>🔰 Welcome to the Admin Dashboard 🔰</h2>
+        <p>
+          Manage all bookings, users, and revenue from one powerful control
+          panel
+        </p>
+      </div>
+      <section class="manage-user">
+        <!-- RIGHT PANEL -->
+        <div class="top-bar">
+          <div class="cards">
+            <div class="cards-wuser">
+              <span>Total Users</span>
+              <h1 id="userCount">0</h1>
+            </div>
+          </div>
+          </div>
+
+          <h2>All registered users across the platform</h2>
+          <div class="table-box">
+            <table class="search-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Username</th>
+                  <th>Email</th>
+                  <th>Password</th>
+                  <th>Time</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="userBody"></tbody>
+            </table>
+          </div>
+
+          <div id="pagination"></div>
+        </div>
+      </section>
+    </div>
+    <script>
+      let users = [], page = 1, perPage = 10;
+      function loadUsers() {
+        fetch("/get-users")
+        .then(r => r.json())
+        .then(d => {
+          users = d;
+          render();
+        });
+      }
+
+function render() {
+  let filtered = users;
+  let start = (page - 1) * perPage;
+  let rows = filtered.slice(start, start + perPage);
+
+  let body = "";
+  rows.forEach(u => {
+    body += `
+    <tr>
+      <td>${u.id}</td>
+      <td><input value="${u.fullname}" onchange="editUser(${u.id}, this.value, '${u.email}')"></td>
+      <td>${u.username}</td>
+      <td><input value="${u.email}" onchange="editUser(${u.id}, '${u.fullname}', this.value)"></td>
+      <td>
+  <span id="pass-${u.id}">${"*".repeat(u.password.length)}</span>
+  <button class="eye-btn" onclick="togglePass(${u.id},'${u.password}')">
+    👁
+  </button>
+</td>
+
+      <td>${u.created_at}</td>
+      <td>
+        <button onclick="toggle(${u.id})">${u.status}</button>
+        <button onclick="del(${u.id})">Delete</button>
+      </td>
+    </tr>`;
+  });
+
+  document.getElementById("userBody").innerHTML = body;
+  document.getElementById("userCount").innerText = users.length;
+}
+
+function del(id){
+  fetch("/delete-user/" + id).then(loadUsers);
+}
+
+function toggle(id){
+  fetch("/toggle-user/" + id).then(loadUsers);
+}
+
+function editUser(id, name, email){
+  let f = new FormData();
+  f.append("id", id);
+  f.append("fullname", name);
+  f.append("email", email);
+  fetch("/edit-user", { method:"POST", body:f });
+}
+
+setInterval(loadUsers,3000);
+loadUsers();
+
+function togglePass(id, realPass) {
+  let el = document.getElementById("pass-" + id);
+
+  if (el.innerText.includes("*")) {
+    el.innerText = realPass;   // show password
+  } else {
+    el.innerText = "*".repeat(realPass.length); // hide again
+  }
+}
+
+</script>
+<script>
+(function () {
+  const searchInput = document.getElementById("tableSearch");
+const tables = document.querySelectorAll(".search-table");
+searchInput.addEventListener("keyup", function () {
+  const value = this.value.toLowerCase().trim();
+
+  tables.forEach(table => {
+    const rows = table.querySelectorAll("tbody tr");
+
+    rows.forEach(row => {
+      row.style.display =
+        row.innerText.toLowerCase().includes(value) ? "" : "none";
+    });
+  });
+});
+})();
+</script>
+  </body>
+</html>

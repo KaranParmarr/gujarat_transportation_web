@@ -1,0 +1,68 @@
+
+CREATE DATABASE gujarat_transport;
+USE gujarat_transport;
+
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  fullname VARCHAR(100),
+  username VARCHAR(50) UNIQUE,
+  email VARCHAR(100),
+  password VARCHAR(255),
+  role VARCHAR(20) DEFAULT 'user'
+);
+
+INSERT INTO users (fullname, username, email, password, role)
+VALUES ('Administrator', 'admin', 'admin@site.com', 'karan@2004', 'admin');
+
+
+gujarat_transport/
+│
+├── app.py
+├── config.py
+├── requirements.txt
+│
+├── database/
+│   └── init_db.py
+│
+├── models/
+│   ├── bus_model.py
+│   ├── seat_model.py
+│   ├── booking_model.py
+│   └── user_model.py
+│
+├── routes/
+│   ├── bus_routes.py
+│   ├── booking_routes.py
+│   ├── admin_routes.py
+│   └── payment_routes.py
+│
+├── templates/
+│   ├── index.html
+│   ├── seat_layout.html
+│   ├── admin_dashboard.html
+│
+├── static/
+│   ├── css/
+│   ├── js/
+│
+└── .env
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://gujarattransportation.com">
+
+body
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P67VBHP3"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+head
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P67VBHP3');</script>
+<!-- End Google Tag Manager -->

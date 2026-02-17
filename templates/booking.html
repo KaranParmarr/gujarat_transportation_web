@@ -1,0 +1,1567 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booking Bus | Gujrat Transport Solutions</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='form.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='main.css') }}"
+    />
+    <meta name="description" content="Book buses and truck cargo transport with Gujarat Transportation. Safe, fast & affordable service across Ahmedabad, Surat, Vadodara, Rajkot and all major metro cities in India." />
+<link rel="canonical" href="https://gujarattransportation.in/" />
+
+<!-- Indexing -->
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+<meta name="googlebot" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+<meta name="bingbot" content="index,follow" />
+
+<!-- Charset / Viewport -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="format-detection" content="telephone=no" />
+
+<!-- Language / Region -->
+<meta name="language" content="en" />
+<meta http-equiv="content-language" content="en-IN" />
+<meta name="geo.region" content="IN-GJ" />
+<meta name="geo.placename" content="Gujarat, India" />
+<meta name="theme-color" content="#0f172a" />
+<meta name="color-scheme" content="light" />
+
+<!-- Brand -->
+<meta name="application-name" content="Gujarat Transportation" />
+<meta name="author" content="Gujarat Transportation" />
+<meta name="publisher" content="Gujarat Transportation" />
+<meta name="copyright" content="© 2026 Gujarat Transportation" />
+<meta name="rating" content="general" />
+<meta name="distribution" content="global" />
+
+<!-- Open Graph (Facebook/WhatsApp) -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Gujarat Transportation" />
+<meta property="og:title" content="Bus Booking & Truck Cargo Transport | Gujarat Transportation" />
+<meta property="og:description" content="Book buses and truck cargo transport with live support, transparent pricing and metro-city coverage across India." />
+<meta property="og:url" content="https://gujarattransportation.in/" />
+<meta property="og:image" content="https://gujarattransportation.in/static/img/og-cover.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="en_IN" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-68RQWKZ0M0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-68RQWKZ0M0');
+</script>
+<!-- Twitter/X -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Gujarat Transportation | Bus + Truck Transport" />
+<meta name="twitter:description" content="Bus booking & truck cargo transport across India with Gujarat Transportation." />
+<meta name="twitter:image" content="https://gujarattransportation.in/static/img/og-cover.jpg" />
+<meta name="google-site-verification" content="7OfugeZXUqwIymOjjhFcYkcB4msVGwM2_zk7LnOmCpM" />
+<!-- iOS / Android PWA -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="Gujarat Transport" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<link rel="apple-touch-icon" href="/static/img/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/static/img/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/static/img/favicon-16.png" />
+<link rel="manifest" href="/static/manifest.webmanifest" />
+
+<!-- Performance / SEO extras -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+
+<!-- Optional (not a ranking factor, but OK) -->
+<meta name="keywords" content="Gujarat transportation, bus booking Gujarat, truck transport Gujarat, cargo transport Ahmedabad, logistics Gujarat, transport service India, bus booking India, truck booking India" />
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P67VBHP3');</script>
+<!-- End Google Tag Manager -->
+    <style>
+      /* ===== LOGIN OVERLAY ===== */
+      .login-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.55);
+        /* transparent background */
+        backdrop-filter: blur(6px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+      }
+
+      /* modal wrapper */
+      .login-modal {
+        position: relative;
+        width: 1050px;
+        /* EXACT admin-style width */
+        height: 750px;
+        /* EXACT admin-style height */
+        max-width: 95%;
+        max-height: 95%;
+        border-radius: 30px;
+        overflow: hidden;
+        background: transparent;
+      }
+
+      /* iframe loads admin.html */
+      .login-modal iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      /* close button */
+      .login-close {
+        position: absolute;
+        top: 14px;
+        right: 40px;
+        font-size: 26px;
+        margin-top: 20px;
+        color: #000;
+        cursor: pointer;
+        z-index: 10;
+        font-weight: bold;
+      }
+
+      /* Transparent admin background */
+      body.login-modal-transparent {
+        background: transparent !important;
+      }
+
+      /* Disable scroll when modal open */
+      body.modal-open {
+        overflow: hidden;
+      }
+
+      /* mobile */
+      @media (max-width: 650px) {
+        .login-modal {
+          width: 100%;
+          height: 100%;
+          margin-bottom:54px;
+          border-radius: 0;
+        }
+      }
+
+      /* ================= USER AUTH UI ================= */
+      .auth-wrapper {
+        position: relative;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .account-btn {
+        background: linear-gradient(135deg, #0ea5e9, #2563eb);
+        color: #fff;
+        padding: 10px 22px;
+        border-radius: 30px;
+        border: none;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .account-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      .account-dropdown {
+        position: absolute;
+        top: 55px;
+        right: 20px;
+        background: #fff;
+        border-radius: 14px;
+        width: 200px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        z-index: 999;
+      }
+
+      .account-dropdown a {
+        padding: 14px 18px;
+        font-size: 14px;
+        color: #111;
+        text-decoration: none;
+        transition: background 0.3s;
+      }
+
+      .account-dropdown a:hover {
+        background: #f1f5f9;
+      }
+
+      .account-dropdown .logout {
+        color: #dc2626;
+        font-weight: 600;
+      }
+
+      /* ===== TABLET ===== */
+      @media (max-width: 768px) {
+        .account-dropdown {
+          right: 30px;
+        }
+      }
+
+      /* ===== DESKTOP ===== */
+      @media (min-width: 1024px) {
+        .account-dropdown {
+          right: 40px;
+        }
+      }
+      .bus-popup{
+        position:fixed;
+        inset:0;
+        background:rgba(0,0,0,.6);
+        display:none;
+        align-items:center;
+        justify-content:center;
+        z-index:9999;
+      }
+      
+      .bus-popup-box{
+        background:#fff;
+        padding:30px;
+        border-radius:12px;
+        text-align:center;
+        width:300px;
+        box-shadow:0 20px 40px rgba(0,0,0,.2);
+      }
+      .bus-popup-box h2{
+        margin-bottom:10px;
+        color:#000;
+      }
+      .bus-popup-box p{
+        color:#000;
+      }
+      
+      .bus-popup-box button{
+        margin-top:15px;
+        background:#ff7a00;
+        color:#fff;
+        border:none;
+        padding:10px 18px;
+        border-radius:8px;
+        cursor:pointer;
+      }
+    </style>
+  </head>
+
+  <body class="bg-slate-50 font-sans">
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P67VBHP3"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!-- 🔹 LOGIN OVERLAY (SHOWS FIRST) -->
+    <div class="login-overlay" id="loginOverlay">
+      <div class="login-modal">
+        <span class="login-close" onclick="closeLogin()">✕</span>
+        <iframe src="/login-modal"></iframe>
+      </div>
+    </div>
+
+    <!-- NavBar Kinks Section -->
+    <header class="navbar">
+      <div class="navbar-container">
+        <!-- Logo -->
+        <a href="/index.html">
+          <img
+            src="{{ url_for('static', filename='img/logo-gujrat.png') }}"
+            alt="Logo"
+            class="logo"
+          />
+        </a>
+
+        <!-- Mobile Menu Toggle (Android & iPhone only) -->
+        <button class="menu-toggle" id="menuToggle">☰</button>
+
+        <!-- Desktop Navigation -->
+        <nav class="desktop-navigation">
+          <a href="/" class="drawer-link">Home</a>
+          <a href="/service" class="drawer-link">Services</a>
+          <a href="/gallery" class="drawer-link">Gallery</a>
+          <!-- BOOK DROPDOWN -->
+          <div class="book-dropdown">
+            <button id="bookBtn" class="drawer-link">Book ▾</button>
+
+            <div id="bookMenu" class="book-menu">
+              <a href="/booking">
+                <span class="icon">🚌</span>
+                <span class="text">Book Bus Tickets</span>
+              </a>
+
+              <a href="/cargotransport">
+                <span class="icon">🚚</span>
+                <span class="text">Book Truck Service</span>
+              </a>
+            </div>
+          </div>
+          <a href="/about" class="drawer-link">About Us</a>
+          <a href="/contact" class="drawer-link">Contact</a>
+          <a href="/booking" class="drawer-btn">Book Now</a>
+          <!-- 🔐 ADMIN LOGIN (HIDDEN FOR USERS) -->
+          <!-- ================= USER STATE & ACCOUNT SECTION ================= -->
+          <section id="user-auth-state" class="auth-wrapper">
+            {% if session.user %}
+            <div class="account-box" id="accountBox">
+              <button class="account-btn" id="accountBtn">
+                {{ session.user.username }} ▾
+              </button>
+
+              <div class="account-dropdown" id="accountDropdown">
+                <a href="/profile"
+                  ><i class="fa-regular fa-user-circle"></i>My Profile</a
+                >
+                <a href="/mybookings"
+                  ><i class="fa-solid fa-briefcase"></i>My Bookings</a
+                >
+
+                {% if user.role == "admin" %}
+                <a href="/adminpanel"
+                  ><i class="fa-solid fa-sliders"></i>Admin Panel</a
+                >
+                {% endif %}
+                <a href="/logout" class="logout"
+                  ><i class="fa-solid fa-right-from-bracket"></i>Logout</a
+                >
+              </div>
+            </div>
+            {% else %}
+            <button
+              class="login-btn-nav"
+              id="openLoginModal"
+              onclick="openLogin()"
+            >
+              Login / Sign Up
+            </button>
+            {% endif %}
+          </section>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Mobile Drawer Menu -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <button class="drawer-close" id="drawerClose">✕</button>
+
+      <a href="/">Home</a>
+      <a href="/service">Services</a>
+      <a href="/gallery">Gallery</a>
+      <a href="/about">About Us</a>
+      <a href="/contact">Contact</a>
+      <a href="/booking" class="drawer-btn">Book Now</a>
+    </div>
+
+    <!-- Booking Header Section -->
+    <section class="gall-section">
+      <div class="gal-container">
+        <div class="gal-item">
+          <img
+            src="{{ url_for('static', filename='img/booking.png') }}"
+            alt="Transportation Service"
+          />
+          <div class="gal-overlay">
+            <badge>🔰Book Now🔰</badge>
+            <h2>Reserve Your Journey</h2>
+            <p>
+              <strong
+                >Search available buses, pick your favorite seats, and travel in
+                comfort.</strong
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mobile Drawer Menu -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <button class="drawer-close" id="drawerClose">✕</button>
+      <a href="/">Home</a>
+      <a href="/service">Services</a>
+      <a href="/gallery">Gallery</a>
+      <a href="/booking">Book</a>
+      <a href="/about">About Us</a>
+      <a href="/contact">Contact</a>
+      <a href="/booking" class="drawer-btn">Book Now</a>
+    </div>
+
+    <!-- ================= BUS BOOKING ================= -->
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-container">
+        <div class="hero-content">
+          <h2>Book Bus Tickets Online</h2>
+          <p>
+            <strong
+              >India's leading platform for bus and truck bookings. Safe,
+              secure, and reliable service with real-time tracking.</strong
+            >
+          </p>
+    </section>
+
+    <!-- Booking Form Section -->
+    <!-- ================== BUS BOOKING SECTION ================== -->
+<section class="busbook" id="bus-booking-section">
+  <div class="busbook__wrap">
+
+    <header class="busbook__head">
+      <div class="busbook__badge">Bus Booking</div>
+      <h1 class="busbook__title">Book a Bus for Your Trip</h1>
+      <p class="busbook__sub">
+        Fill the form, get instant fare, and proceed to payment. AC/Non-AC pricing is calculated per KM automatically.
+      </p>
+    </header>
+
+    <div class="busbook__grid">
+
+      <!-- LEFT: FORM CARD -->
+      <article class="busbook__card busbook__card--form">
+        <h2 class="busbook__cardTitle">Booking Details</h2>
+
+        <form id="busBookingForm" autocomplete="off">
+          <!-- Row 1 -->
+          <div class="busbook__row">
+            <div class="busbook__field">
+              <label for="bb_fullname">Full Name <span>*</span></label>
+              <input id="bb_fullname" name="fullname" type="text" placeholder="Enter full name" required />
+            </div>
+            <div class="busbook__field">
+              <label for="bb_phone">Phone No <span>*</span></label>
+              <input id="bb_phone" name="phone" type="tel" placeholder="Enter phone number" required />
+            </div>
+          </div>
+
+          <!-- Row 2 -->
+          <div class="busbook__row">
+            <div class="busbook__field">
+              <label for="bb_email">Email <span>*</span></label>
+              <input id="bb_email" name="email" type="email" placeholder="Enter email address" required />
+            </div>
+
+            <div class="busbook__field">
+              <label for="bb_busType">Bus Type <span>*</span></label>
+              <select id="bb_busType" name="busType" required>
+                <option value="" selected disabled>Select Bus Type</option>
+                <option value="ac">A/c</option>
+                <option value="nonac">Non-A/c</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Row 3 -->
+          <div class="busbook__row">
+            <div class="busbook__field">
+              <label for="bb_seaterType">Seater Type <span>*</span></label>
+              <select id="bb_seaterType" name="seaterType" required>
+                <option value="" selected disabled>Select Seater Type</option>
+                <option value="mini">Mini Bus – 16 Seater</option>
+                <option value="medium">Medium Bus – 27 Seater</option>
+                <option value="large">Large Bus – 35 Seater</option>
+                <option value="family">Family Bus – 50 Seater</option>
+              </select>
+            </div>
+
+            <div class="busbook__field">
+              <label for="bb_date">Journey Date <span>*</span></label>
+              <input id="bb_date" name="journeyDate" type="date" required />
+            </div>
+          </div>
+
+          <!-- Row 4 -->
+          <div class="busbook__row">
+            <div class="busbook__field">
+              <label for="bb_from">From (Departure City) <span>*</span></label>
+              <input id="bb_from" name="from" type="text" placeholder="Departure City" required />
+              <small class="busbook__hint">
+                Tip: If Google Distance is enabled, distance will auto-fill after entering From/To.
+              </small>
+            </div>
+
+            <div class="busbook__field">
+              <label for="bb_to">To (Destination City) <span>*</span></label>
+              <input id="bb_to" name="to" type="text" placeholder="Destination City" required />
+            </div>
+          </div>
+
+          <!-- Row 5 -->
+          <div class="busbook__row">
+            <div class="busbook__field">
+              <label for="bb_distance">Distance (KMs) <span>*</span></label>
+              <input id="bb_distance" name="distance" type="number" min="1" step="1" placeholder="Auto / Manual KM" required />
+              <small class="busbook__hint">
+                You can also manually enter distance if needed.
+              </small>
+            </div>
+
+            <div class="busbook__field busbook__total">
+              <label>Total Amount</label>
+              <div class="busbook__amount">
+                ₹ <span id="bb_totalAmount">0</span>
+              </div>
+              <small class="busbook__hint" id="bb_rateHint">Select bus type + seater to see per-KM rate.</small>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="busbook__actions">
+            <button type="button" class="busbook__ghost" id="bb_calcBtn">
+              Calculate Fare
+            </button>
+            <button type="submit" class="busbook__pay" id="bb_payBtn">
+              Proceed to Payment
+            </button>
+          </div>
+
+          <div class="busbook__notice" id="bb_notice" aria-live="polite"></div>
+
+          <!-- Hidden (useful for backend posting) -->
+          <input type="hidden" id="bb_ratePerKm" name="ratePerKm" value="0" />
+          <input type="hidden" id="bb_totalHidden" name="totalAmount" value="0" />
+        </form>
+      </article>
+
+      <!-- RIGHT: SUMMARY CARD -->
+      <aside class="busbook__card busbook__card--summary">
+        <h2 class="busbook__cardTitle">Fare Rules (Per KM)</h2>
+
+        <div class="busbook__rules">
+          <div class="busbook__rule">
+            <h3>✅ A/c</h3>
+            <ul>
+              <li>Mini (16) → <b>₹144/km</b></li>
+              <li>Medium (27) → <b>₹150/km</b></li>
+              <li>Large (35) → <b>₹156/km</b></li>
+              <li>Family (50) → <b>₹163/km</b></li>
+            </ul>
+          </div>
+
+          <div class="busbook__rule">
+            <h3>✅ Non-A/c</h3>
+            <ul>
+              <li>Mini (16) → <b>₹132/km</b></li>
+              <li>Medium (27) → <b>₹140/km</b></li>
+              <li>Large (35) → <b>₹146/km</b></li>
+              <li>Family (50) → <b>₹153/km</b></li>
+            </ul>
+          </div>
+
+          <div class="busbook__rule busbook__rule--note">
+            <h3>Note</h3>
+            <p>
+              Base rule (fallback): <b>₹42/km</b> if bus type or seater is not selected.
+              But booking requires both selections.
+            </p>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+  <!-- BUS BOOKING POPUP -->
+<div id="busPopup" class="bus-popup">
+  <div class="bus-popup-box">
+    <h2>🎉 Booking Successful</h2>
+    <p id="busPopupName">Thank you!</p>
+    <button onclick="closeBusPopup()">OK</button>
+  </div>
+</div>
+
+</section>
+
+<!-- ================== BUS BOOKING FAQ SECTION ================== -->
+<section class="busfaq" id="bus-faqs">
+  <div class="busfaq__container">
+
+    <header class="busfaq__header">
+      <h1 class="busfaq__title">Bus Booking FAQs</h1>
+      <p class="busfaq__subtitle">
+        Answers about pricing, AC/Non-AC, distance, booking, payment, and trip details.
+      </p>
+    </header>
+
+    <div class="busfaq__grid">
+
+      <article class="busfaq__item">
+        <h2 class="busfaq__q f1">
+          <button class="busfaq__btn" type="button" aria-expanded="false">
+            How is my bus booking fare calculated?
+            <span class="busfaq__icon" aria-hidden="true"></span>
+          </button>
+        </h2>
+        <div class="busfaq__a" hidden>
+          Fare = Distance (KM) × per-KM rate based on Bus Type (AC/Non-AC) and Seater Type. The total updates automatically.
+        </div>
+      </article>
+
+      <article class="busfaq__item">
+        <h2 class="busfaq__q f2">
+          <button class="busfaq__btn" type="button" aria-expanded="false">
+            Can distance auto-calculate using Google Maps?
+            <span class="busfaq__icon" aria-hidden="true"></span>
+          </button>
+        </h2>
+        <div class="busfaq__a" hidden>
+          Yes—if you enable Google Distance Matrix API, your From/To fields can auto-fill the distance. You can still edit it manually.
+        </div>
+      </article>
+
+      <article class="busfaq__item">
+        <h2 class="busfaq__q f3">
+          <button class="busfaq__btn" type="button" aria-expanded="false">
+            What if I want to enter distance manually?
+            <span class="busfaq__icon" aria-hidden="true"></span>
+          </button>
+        </h2>
+        <div class="busfaq__a" hidden>
+          You can type the distance (KM) directly in the Distance field and the fare updates instantly.
+        </div>
+      </article>
+
+      <article class="busfaq__item">
+        <h2 class="busfaq__q f4">
+          <button class="busfaq__btn" type="button" aria-expanded="false">
+            What are AC bus per-KM rates?
+            <span class="busfaq__icon" aria-hidden="true"></span>
+          </button>
+        </h2>
+        <div class="busfaq__a" hidden>
+          AC: Mini ₹144/km, Medium ₹150/km, Large ₹156/km, Family ₹163/km.
+        </div>
+      </article>
+
+      <article class="busfaq__item">
+        <h2 class="busfaq__q f5">
+          <button class="busfaq__btn" type="button" aria-expanded="false">
+            What are Non-AC bus per-KM rates?
+            <span class="busfaq__icon" aria-hidden="true"></span>
+          </button>
+        </h2>
+        <div class="busfaq__a" hidden>
+          Non-AC: Mini ₹132/km, Medium ₹140/km, Large ₹146/km, Family ₹153/km.
+        </div>
+      </article>
+
+      <article class="busfaq__item">
+        <h2 class="busfaq__q f6">
+          <button class="busfaq__btn" type="button" aria-expanded="false">
+            Are all fields required for booking?
+            <span class="busfaq__icon" aria-hidden="true"></span>
+          </button>
+        </h2>
+        <div class="busfaq__a" hidden>
+          Yes. Full name, phone, email, bus type, seater type, distance, from/to cities, and journey date are required.
+        </div>
+      </article>
+
+      <article class="busfaq__item">
+        <h2 class="busfaq__q f7">
+          <button class="busfaq__btn" type="button" aria-expanded="false">
+            Can I book for a future date?
+            <span class="busfaq__icon" aria-hidden="true"></span>
+          </button>
+        </h2>
+        <div class="busfaq__a" hidden>
+          Yes, choose any available future journey date. Early booking helps secure availability.
+        </div>
+      </article>
+
+      <article class="busfaq__item">
+        <h2 class="busfaq__q f8">
+          <button class="busfaq__btn" type="button" aria-expanded="false">
+            What does “Family Bus – 50 seater” mean?
+            <span class="busfaq__icon" aria-hidden="true"></span>
+          </button>
+        </h2>
+        <div class="busfaq__a" hidden>
+          Family bus is a large-capacity option suitable for tours, groups, and weddings with 50-seat layout.
+        </div>
+      </article>
+
+      <article class="busfaq__item">
+        <h2 class="busfaq__q f9">
+          <button class="busfaq__btn" type="button" aria-expanded="false">
+            Will I receive a confirmation after payment?
+            <span class="busfaq__icon" aria-hidden="true"></span>
+          </button>
+        </h2>
+        <div class="busfaq__a" hidden>
+          Yes. After successful payment, show a confirmation screen and optionally store it in your admin panel.
+        </div>
+      </article>
+
+      <article class="busfaq__item">
+        <h2 class="busfaq__q f10">
+          <button class="busfaq__btn" type="button" aria-expanded="false">
+            Can I edit my booking details before paying?
+            <span class="busfaq__icon" aria-hidden="true"></span>
+          </button>
+        </h2>
+        <div class="busfaq__a" hidden>
+          Yes. Update any field and click “Calculate Fare” again, or just modify and the total will refresh automatically.
+        </div>
+      </article>
+
+      <article class="busfaq__item">
+        <h2 class="busfaq__q f11">
+          <button class="busfaq__btn" type="button" aria-expanded="false">
+            Do you support UPI / Razorpay payments?
+            <span class="busfaq__icon" aria-hidden="true"></span>
+          </button>
+        </h2>
+        <div class="busfaq__a" hidden>
+          You can connect Razorpay to accept UPI, cards, and netbanking. The “Proceed to Payment” button is ready to trigger payment flow.
+        </div>
+      </article>
+
+      <article class="busfaq__item">
+        <h2 class="busfaq__q f12">
+          <button class="busfaq__btn" type="button" aria-expanded="false">
+            Is the per-KM rate fixed for all routes?
+            <span class="busfaq__icon" aria-hidden="true"></span>
+          </button>
+        </h2>
+        <div class="busfaq__a" hidden>
+          In this model yes—rate depends on bus type + seater type. You can extend later for tolls, night charges, or route multipliers.
+        </div>
+      </article>
+
+      <article class="busfaq__item">
+        <h2 class="busfaq__q f13">
+          <button class="busfaq__btn" type="button" aria-expanded="false">
+            What happens if the distance is wrong?
+            <span class="busfaq__icon" aria-hidden="true"></span>
+          </button>
+        </h2>
+        <div class="busfaq__a" hidden>
+          Correct the distance manually. If Google distance is enabled, it will be close to road route distance.
+        </div>
+      </article>
+
+      <article class="busfaq__item">
+        <h2 class="busfaq__q f14">
+          <button class="busfaq__btn" type="button" aria-expanded="false">
+            Can I book multiple buses in one payment?
+            <span class="busfaq__icon" aria-hidden="true"></span>
+          </button>
+        </h2>
+        <div class="busfaq__a" hidden>
+          This form is for one booking at a time. You can repeat the process for multiple bookings.
+        </div>
+      </article>
+
+      <article class="busfaq__item">
+        <h2 class="busfaq__q f15">
+          <button class="busfaq__btn" type="button" aria-expanded="false">
+            Is my data secure?
+            <span class="busfaq__icon" aria-hidden="true"></span>
+          </button>
+        </h2>
+        <div class="busfaq__a" hidden>
+          Use HTTPS, validate inputs on server, and process payments via secure gateways. Store only required data.
+        </div>
+      </article>
+
+      <article class="busfaq__item">
+        <h2 class="busfaq__q f16">
+          <button class="busfaq__btn" type="button" aria-expanded="false">
+            Can I cancel or modify after payment?
+            <span class="busfaq__icon" aria-hidden="true"></span>
+          </button>
+        </h2>
+        <div class="busfaq__a" hidden>
+          Policy depends on your business rules. You can implement cancellation windows and partial refunds via Razorpay.
+        </div>
+      </article>
+
+      <article class="busfaq__item">
+        <h2 class="busfaq__q f17">
+          <button class="busfaq__btn" type="button" aria-expanded="false">
+            Do you provide driver and fuel?
+            <span class="busfaq__icon" aria-hidden="true"></span>
+          </button>
+        </h2>
+        <div class="busfaq__a" hidden>
+          Typically yes—bus service includes driver and fuel; you can add specific inclusions in your booking confirmation.
+        </div>
+      </article>
+
+      <article class="busfaq__item">
+        <h2 class="busfaq__q f18">
+          <button class="busfaq__btn" type="button" aria-expanded="false">
+            How do I get support?
+            <span class="busfaq__icon" aria-hidden="true"></span>
+          </button>
+        </h2>
+        <div class="busfaq__a" hidden>
+          Use your website’s contact form or support number. Share your booking details for quick help.
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <script src="{{ url_for('static', filename='js/data.js') }}"></script>
+    <!-- Footer Section -->
+    <footer class="footer-section">
+      <div class="footer-container">
+        <div class="footer-grid">
+          <!-- Brand -->
+          <div class="footer-brand">
+            <h2 class="footer-logo">
+              <img
+                src="{{ url_for('static', filename='/img/footer-logo.png') }}"
+                alt="Gujrat Transport Logo"
+                class="footer-logo-img"
+              />
+            </h2>
+
+            <p class="footer-text">
+              Your trusted partner for comfortable bus travel and reliable truck
+              transportation services across the nation.
+            </p>
+
+            <div class="social-icons">
+              <a href="#"><span>🌐</span></a>
+              <a href="#"><span>🐦</span></a>
+              <a href="#"><span>📸</span></a>
+              <a href="#"><span>💼</span></a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="footer-links">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/about">About Us</a></li>
+              <li><a href="/gallery">Gallery</a></li>
+              <li><a href="/service">Services</a></li>
+              <li><a href="/booking">Book Now</a></li>
+              <li><a href="/contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <!-- Services -->
+          <div class="footer-services">
+            <h3>Our Services</h3>
+            <ul>
+              <li><a href="/service">Sleeper Coach Bus</a></li>
+              <li><a href="/service">A/C Sleeper Coach</a></li>
+              <li><a href="/service">Heavy Truck Transport</a></li>
+              <li><a href="/service">Container Services</a></li>
+              <li><a href="/service">Express Delivery</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact -->
+          <div class="footer-contact">
+            <h3>Contact Us</h3>
+            <ul>
+              <li>
+                <a href="https://maps.google.com" target="_blank">
+                  📍 05 Transport Hub, Highway Road, Ahmedabad, Gujarat 700007
+                </a>
+              </li>
+              <li>
+                <a href="tel:+918976645502"> 📞 +91 897-664-5502 </a>
+              </li>
+              <li>
+                <a href="mailto:official.karanparmar@gmail.com">
+                  ✉️ official.karanparmar@gmail.com
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <hr class="footer-divider" />
+
+        <div class="footer-bottom">
+          <p>© 2025 Gujrat Transport. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <a
+      href="https://wa.me/918976645502?text=Hi%20I%20want%20a%20booking%20service"
+      class="whatsapp-float"
+      target="_blank"
+    >
+      <i class="fab fa-whatsapp"></i>
+      <span>WhatsApp</span>
+    </a>
+
+    <!-- MenuToggle Script -->
+    <!-- 🔹 LOGIN MODAL SCRIPT (ADDED) -->
+    <script>
+      const overlay = document.getElementById("loginOverlay");
+
+      /* ===========================
+       FIRST VISIT CHECK
+    =========================== */
+      document.addEventListener("DOMContentLoaded", () => {
+        const firstVisit = localStorage.getItem("firstVisitDone");
+
+        if (!firstVisit) {
+          // Show modal on first visit
+          overlay.style.display = "flex";
+          document.body.classList.add("modal-open");
+
+          // Mark as visited
+          localStorage.setItem("firstVisitDone", "true");
+        } else {
+          // Hide on refresh / next visits
+          overlay.style.display = "none";
+          document.body.classList.remove("modal-open");
+        }
+      });
+
+      function closeLogin() {
+        overlay.style.display = "none";
+        document.body.classList.remove("modal-open");
+      }
+
+      function openLogin() {
+        overlay.style.display = "flex";
+        document.body.classList.add("modal-open");
+      }
+    </script>
+
+    <!-- Scripts -->
+    <script>
+      lucide.createIcons();
+
+      // Menu Toggle Logic
+      const menuToggle = document.getElementById("menuToggle");
+      const closeMenu = document.getElementById("closeMenu");
+      const navMenu = document.getElementById("navMenu");
+      const menuOverlay = document.getElementById("menuOverlay");
+
+      const openDrawer = () => {
+        navMenu.classList.add("is-open");
+        menuOverlay.classList.add("is-visible");
+        document.body.style.overflow = "hidden"; // Prevent scrolling when open
+      };
+
+      const closeDrawer = () => {
+        navMenu.classList.remove("is-open");
+        menuOverlay.classList.remove("is-visible");
+        document.body.style.overflow = ""; // Restore scrolling
+      };
+
+      menuToggle.addEventListener("click", openDrawer);
+      closeMenu.addEventListener("click", closeDrawer);
+      menuOverlay.addEventListener("click", closeDrawer);
+
+      // Intersection Observer for animations
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("show");
+              entry.target.classList.add("active");
+            }
+          });
+        },
+        { threshold: 0.2 },
+      );
+
+      document
+        .querySelectorAll(".scroll-animate")
+        .forEach((el) => observer.observe(el));
+      document
+        .querySelectorAll(".scroll-slide")
+        .forEach((el) => observer.observe(el));
+    </script>
+    <script>
+      const drawer = document.getElementById("mobileDrawer");
+      const closeBtn = document.getElementById("drawerClose");
+
+      menuToggle.addEventListener("click", () => {
+        drawer.classList.add("active");
+      });
+
+      closeBtn.addEventListener("click", () => {
+        drawer.classList.remove("active");
+      });
+    </script>
+
+    <script>
+      const overlay = document.getElementById("loginOverlay");
+
+      /* ===========================
+       FIRST VISIT CHECK
+    =========================== */
+      document.addEventListener("DOMContentLoaded", () => {
+        const firstVisit = localStorage.getItem("firstVisitDone");
+
+        if (!firstVisit) {
+          // Show modal on first visit
+          overlay.style.display = "flex";
+          document.body.classList.add("modal-open");
+
+          // Mark as visited
+          localStorage.setItem("firstVisitDone", "true");
+        } else {
+          // Hide on refresh / next visits
+          overlay.style.display = "none";
+          document.body.classList.remove("modal-open");
+        }
+      });
+
+      function closeLogin() {
+        overlay.style.display = "none";
+        document.body.classList.remove("modal-open");
+      }
+
+      function openLogin() {
+        overlay.style.display = "flex";
+        document.body.classList.add("modal-open");
+      }
+    </script>
+    <script>
+      const accountBtn = document.getElementById("accountBtn");
+      const accountDropdown = document.getElementById("accountDropdown");
+
+      if (accountBtn) {
+        accountBtn.addEventListener("click", function (e) {
+          e.stopPropagation();
+
+          if (accountDropdown.style.display === "flex") {
+            accountDropdown.style.display = "none";
+          } else {
+            accountDropdown.style.display = "flex";
+          }
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener("click", function () {
+          accountDropdown.style.display = "none";
+        });
+      }
+    </script>
+    <script>
+      const accountBtn = document.getElementById("accountBtn");
+      const accountDropdown = document.getElementById("accountDropdown");
+
+      if (accountBtn) {
+        accountBtn.addEventListener("click", function (e) {
+          e.stopPropagation();
+
+          if (accountDropdown.style.display === "flex") {
+            accountDropdown.style.display = "none";
+          } else {
+            accountDropdown.style.display = "flex";
+          }
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener("click", function () {
+          accountDropdown.style.display = "none";
+        });
+      }
+    </script>
+    <script>
+  /* ===================== BUS BOOKING LOGIC + AUTO DISTANCE + SAVE ===================== */
+  (function () {
+    // FORM ELEMENTS (your IDs)
+    const form = document.getElementById("busBookingForm");
+    const fullname = document.getElementById("bb_fullname");
+    const phone = document.getElementById("bb_phone");
+    const email = document.getElementById("bb_email");
+    const busType = document.getElementById("bb_busType");
+    const seaterType = document.getElementById("bb_seaterType");
+    const date = document.getElementById("bb_date");
+    const from = document.getElementById("bb_from");
+    const to = document.getElementById("bb_to");
+    const distance = document.getElementById("bb_distance");
+    const rateHint = document.getElementById("bb_rateHint");
+    const totalSpan = document.getElementById("bb_totalAmount");
+    const notice = document.getElementById("bb_notice");
+    const ratePerKmHidden = document.getElementById("bb_ratePerKm");
+    const totalHidden = document.getElementById("bb_totalHidden");
+    const calcBtn = document.getElementById("bb_calcBtn");
+    const payBtn = document.getElementById("bb_payBtn");
+
+    // popup (your HTML already exists)
+    const popup = document.getElementById("busPopup");
+    const popupName = document.getElementById("busPopupName");
+
+    if (!form) return;
+
+    // Rate table
+    const RATES = {
+      ac: { mini: 144, medium: 150, large: 156, family: 163 },
+      nonac: { mini: 132, medium: 140, large: 146, family: 153 },
+    };
+
+    // Debounce
+    let t;
+    function debounce(fn, wait = 700) {
+      clearTimeout(t);
+      t = setTimeout(fn, wait);
+    }
+
+    function toNumber(v) {
+      const n = parseFloat(String(v || "").replace(/[^\d.]/g, ""));
+      return Number.isFinite(n) ? n : 0;
+    }
+
+    function getRate() {
+      const bt = busType.value;
+      const st = seaterType.value;
+      if (bt && st && RATES[bt] && RATES[bt][st]) return RATES[bt][st];
+      return 42; // fallback (still requires selection)
+    }
+
+    function setNotice(msg, type = "info") {
+      if (!notice) return;
+      notice.className = "busbook__notice " + (type ? `is-${type}` : "");
+      notice.textContent = msg || "";
+    }
+
+    function updateFare() {
+      const km = Math.max(0, Math.round(toNumber(distance.value)));
+      const rate = getRate();
+
+      if (ratePerKmHidden) ratePerKmHidden.value = rate;
+
+      if (!busType.value || !seaterType.value) {
+        if (rateHint) rateHint.textContent = "Select bus type + seater to see per-KM rate.";
+      } else {
+        if (rateHint) rateHint.textContent = `Rate: ₹${rate}/km • Total = Distance × Rate`;
+      }
+
+      const total = km > 0 ? km * rate : 0;
+      if (totalSpan) totalSpan.textContent = total.toLocaleString("en-IN");
+      if (totalHidden) totalHidden.value = String(total);
+
+      return { km, rate, total };
+    }
+
+    // ✅ FIXED: matches your Flask route: /api/distance?from=...&to=...
+    async function fetchDistanceFromServer() {
+      const origin = (from.value || "").trim();
+      const destination = (to.value || "").trim();
+      if (!origin || !destination) return;
+
+      setNotice("Calculating distance from Google route...", "info");
+
+      try {
+        const url = `/api/distance?from=${encodeURIComponent(origin)}&to=${encodeURIComponent(destination)}`;
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if (!data.ok) {
+          setNotice("Distance not found. Please enter KM manually.", "warn");
+          return;
+        }
+
+        // Your API returns: { ok:true, km, distance_text, duration_text }
+        distance.value = Math.round(toNumber(data.km));
+        updateFare();
+
+        const txt = data.distance_text || `${data.km} km`;
+        setNotice(`Auto distance: ${txt}`, "ok");
+      } catch (e) {
+        setNotice("Google distance error. Please enter KM manually.", "warn");
+        console.error(e);
+      }
+    }
+
+    // Auto distance triggers
+    from.addEventListener("input", () => debounce(fetchDistanceFromServer, 700));
+    to.addEventListener("input", () => debounce(fetchDistanceFromServer, 700));
+    from.addEventListener("blur", fetchDistanceFromServer);
+    to.addEventListener("blur", fetchDistanceFromServer);
+
+    // Fare updates
+    busType.addEventListener("change", updateFare);
+    seaterType.addEventListener("change", updateFare);
+    distance.addEventListener("input", () => {
+      setNotice("Manual distance entered.", "info");
+      updateFare();
+    });
+
+    // Calculate Fare button
+    calcBtn.addEventListener("click", () => {
+      const { km, rate, total } = updateFare();
+
+      if (!busType.value || !seaterType.value) {
+        setNotice("Please select Bus Type and Seater Type first.", "warn");
+        return;
+      }
+      if (!km) {
+        setNotice("Please enter distance (KM) or fill From/To for auto distance.", "warn");
+        return;
+      }
+
+      setNotice(`Fare calculated ✅ ₹${total.toLocaleString("en-IN")} (₹${rate}/km × ${km} km)`, "ok");
+    });
+
+    // Proceed to payment (save booking to backend)
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      if (!fullname.value.trim() || !phone.value.trim() || !email.value.trim()) {
+        setNotice("Please fill Full Name, Phone and Email.", "warn");
+        return;
+      }
+      if (!busType.value || !seaterType.value) {
+        setNotice("Please select Bus Type and Seater Type.", "warn");
+        return;
+      }
+      if (!from.value.trim() || !to.value.trim() || !date.value) {
+        setNotice("Please fill From, To and Journey Date.", "warn");
+        return;
+      }
+
+      const { km, rate, total } = updateFare();
+      if (!km || total <= 0) {
+        setNotice("Distance is required. Enter KM or use auto-distance.", "warn");
+        return;
+      }
+
+      setNotice(`Proceeding to payment of ₹${total.toLocaleString("en-IN")}...`, "ok");
+
+      // ✅ Save to backend (JSON + MySQL)
+      try {
+        const fd = new FormData(form);
+
+        // Ensure backend receives numeric total
+        fd.set("totalAmount", totalHidden.value);
+        // Your backend doesn't store journeyDate currently, but safe to send
+        fd.set("journeyDate", date.value);
+
+        const resp = await fetch("/save-bus-booking", { method: "POST", body: fd });
+        const data = await resp.json();
+
+        if (data.status === "success") {
+          // show popup
+          const name = (data.fullname || fullname.value || "Guest").trim();
+          if (popupName) popupName.innerText = `Thank you ${name} 😊`;
+          if (popup) popup.style.display = "flex";
+        } else if (data.status === "login_required") {
+          alert("Login required");
+          if (typeof openLogin === "function") openLogin();
+        } else {
+          alert("Booking not saved. Please check fields.");
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Server error while saving booking.");
+      }
+    });
+
+    // initial fare render
+    updateFare();
+  })();
+
+  /* ===================== FAQ TOGGLE ===================== */
+  (function () {
+    const items = document.querySelectorAll(".busfaq__item");
+    items.forEach((item) => {
+      const btn = item.querySelector(".busfaq__btn");
+      const ans = item.querySelector(".busfaq__a");
+      if (!btn || !ans) return;
+
+      btn.addEventListener("click", () => {
+        const expanded = btn.getAttribute("aria-expanded") === "true";
+        btn.setAttribute("aria-expanded", String(!expanded));
+        ans.hidden = expanded;
+        item.classList.toggle("is-open", !expanded);
+      });
+    });
+  })();
+
+  /* ===================== POPUP CLOSE ===================== */
+  function closeBusPopup() {
+    const popup = document.getElementById("busPopup");
+    if (popup) popup.style.display = "none";
+    // redirect optional
+    window.location.href = "/adminpanel";
+  }
+</script>
+
+<script>
+/* ===================== BOOK DROPDOWN JS ===================== */
+(function () {
+  const bookBtn = document.getElementById("bookBtn");
+  const bookMenu = document.getElementById("bookMenu");
+
+  if (!bookBtn || !bookMenu) return;
+
+  // Toggle dropdown
+  bookBtn.addEventListener("click", function (e) {
+    e.stopPropagation();
+    bookMenu.classList.toggle("show");
+  });
+
+  // Close when clicking outside
+  document.addEventListener("click", function (e) {
+    if (!bookMenu.contains(e.target) && e.target !== bookBtn) {
+      bookMenu.classList.remove("show");
+    }
+  });
+
+  // Close on ESC key
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+      bookMenu.classList.remove("show");
+    }
+  });
+
+  // Close after clicking a link
+  bookMenu.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      bookMenu.classList.remove("show");
+    });
+  });
+})();
+</script>
+<!-- ================= BOTTOM NAVIGATION ================= -->
+ <!-- ✅ ACCOUNT LOGIN OVERLAY (for bottom nav account click) -->
+    <div
+      class="login-overlay"
+      id="accountLoginOverlay"
+      aria-hidden="true"
+      style="display: none"
+    >
+      <div class="login-modal">
+        <button
+          class="login-close"
+          type="button"
+          aria-label="Close"
+          id="closeAccountLogin"
+        >
+          ✕
+        </button>
+        <iframe src="/login-modal" title="Login / Signup"></iframe>
+      </div>
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="/" class="bottom-nav__item" data-nav="home">
+        <i class="fa fa-house"></i>
+        <span>Home</span>
+      </a>
+
+      <a href="/booking" class="bottom-nav__item" data-nav="bus">
+        <i class="fa fa-bus"></i>
+        <span>Bus</span>
+      </a>
+
+      <a href="/cargotransport" class="bottom-nav__item" data-nav="truck">
+        <i class="fa fa-truck"></i>
+        <span>Truck</span>
+      </a>
+
+      <a
+        href="/profile"
+        class="bottom-nav__item"
+        id="bottomAccount"
+        data-nav="account"
+      >
+        <i class="fa fa-user"></i>
+        <span>Account</span>
+      </a>
+    </nav>
+
+    <script>
+      /* ===== LOGIN STATE (Flask) ===== */
+      window.USER_LOGGED_IN = {{ "true" if session.user else "false" }};
+
+      const accountLink = document.getElementById("bottomAccount");
+      const accountOverlay = document.getElementById("accountLoginOverlay");
+      const closeAccountBtn = document.getElementById("closeAccountLogin");
+
+      function openAccountLogin() {
+        accountOverlay.style.display = "flex";
+        document.body.classList.add("modal-open");
+        accountOverlay.setAttribute("aria-hidden", "false");
+      }
+
+      function closeAccountLogin() {
+        accountOverlay.style.display = "none";
+        document.body.classList.remove("modal-open");
+        accountOverlay.setAttribute("aria-hidden", "true");
+      }
+
+      /* Close button fix */
+      if (closeAccountBtn) {
+        closeAccountBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          closeAccountLogin();
+        });
+      }
+
+      /* click outside */
+      if (accountOverlay) {
+        accountOverlay.addEventListener("click", (e) => {
+          if (e.target === accountOverlay) closeAccountLogin();
+        });
+      }
+
+      /* ESC close */
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeAccountLogin();
+      });
+
+      /* Account click logic */
+      if (accountLink) {
+        accountLink.addEventListener("click", (e) => {
+          if (!window.USER_LOGGED_IN) {
+            e.preventDefault();
+            openAccountLogin();
+          }
+        });
+      }
+
+      /* Active nav */
+      (function () {
+        const path = window.location.pathname;
+        document.querySelectorAll(".bottom-nav__item").forEach((link) => {
+          if (path === "/" && link.dataset.nav === "home")
+            link.classList.add("active");
+          else if (path.includes("booking") && link.dataset.nav === "bus")
+            link.classList.add("active");
+          else if (path.includes("cargotransport") && link.dataset.nav === "truck")
+            link.classList.add("active");
+          else if (
+            (path.includes("profile") || path.includes("mybookings")) &&
+            link.dataset.nav === "account"
+          )
+            link.classList.add("active");
+        });
+      })();
+    </script>
+<script>
+(function () {
+  const path = window.location.pathname;
+  document.querySelectorAll(".bottom-nav__item").forEach(link => {
+    if (link.getAttribute("href") === path) {
+      link.classList.add("active");
+    }
+  });
+})();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://gujarattransportation.in/#website",
+      "url": "https://gujarattransportation.in/",
+      "name": "Gujarat Transportation",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://gujarattransportation.in/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://gujarattransportation.in/#org",
+      "name": "Gujarat Transportation",
+      "url": "https://gujarattransportation.in/",
+      "logo": "https://gujarattransportation.in/static/img/logo-gujrat.png",
+      "sameAs": [
+        "https://www.facebook.com/yourpage",
+        "https://www.instagram.com/yourpage",
+        "https://www.linkedin.com/company/yourpage"
+      ]
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://gujarattransportation.in/#localbusiness",
+      "name": "Gujarat Transportation",
+      "image": "https://gujarattransportation.in/static/img/og-cover.jpg",
+      "url": "https://gujarattransportation.in/",
+      "telephone": "+91-8976645502",
+      "priceRange": "₹₹",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "05 Transport Hub, Highway Road",
+        "addressLocality": "Ahmedabad",
+        "addressRegion": "Gujarat",
+        "postalCode": "700007",
+        "addressCountry": "IN"
+      },
+      "areaServed": [
+        "Ahmedabad","Surat","Vadodara","Rajkot",
+        "Mumbai","Delhi NCR","Pune","Bengaluru","Hyderabad","Chennai","Kolkata"
+      ],
+      "makesOffer": [
+        {
+          "@type": "Offer",
+          "name": "Bus Booking Service",
+          "category": "Bus",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Truck / Cargo Transport Service",
+          "category": "Truck",
+          "availability": "https://schema.org/InStock"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://gujarattransportation.in/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do you provide bus booking in metro cities?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We provide bus booking across major metro cities and Gujarat routes. Contact support for group/corporate bookings."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you provide truck cargo transport across India?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We provide truck cargo transport for intercity delivery, shifting and business logistics across India."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+</body>
+</html>

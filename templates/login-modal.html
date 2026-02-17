@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login/Signup Form</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='login-modal.css') }}"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- credits to the writter @leonam-silva-de-souza -->
+    <div class="regi-container">
+      <!-- LOGIN FORM -->
+      <div class="form-box login">
+        <form action="/login" method="post" id="loginForm" autocomplete="off">
+          <h1>Login</h1>
+
+          <div class="input-box">
+            <label>Username:</label>
+            <input
+              type="text"
+              id="loginUsername"
+              name="username"
+              placeholder="Username"
+              required
+            />
+            <i class="bx bxs-user"></i>
+          </div>
+
+          <div class="input-box">
+            <label>Password:</label>
+            <input
+              type="password"
+              id="loginPassword"
+              name="password"
+              placeholder="Password"
+              required
+            />
+            <i class="bx bxs-lock-alt"></i>
+          </div>
+
+          <div class="forgot-link">
+            <a href="#">Forgot Password?</a>
+          </div>
+
+          <button type="submit" class="btn-req" id="loginBtn">Login</button>
+        </form>
+      </div>
+
+      <!-- REGISTER FORM -->
+      <div class="form-box register">
+        <form
+          action="/register"
+          method="post"
+          id="registerForm"
+          autocomplete="off"
+        >
+          <h1>Registration</h1>
+
+          <div class="input-box">
+            <label>Full Name:</label>
+            <input
+              type="text"
+              id="regFullName"
+              name="fullname"
+              placeholder="Type your Name Here"
+              required
+            />
+            <i class="bx bxs-user"></i>
+          </div>
+
+          <div class="input-box">
+            <label>Username:</label>
+            <input
+              type="text"
+              id="regUsername"
+              name="username"
+              placeholder="Username"
+              required
+            />
+            <i class="bx bxs-user"></i>
+          </div>
+
+          <div class="input-box">
+            <label>Emails:</label>
+            <input
+              type="email"
+              id="regEmail"
+              name="email"
+              placeholder="Email"
+              required
+            />
+            <i class="bx bxs-envelope"></i>
+          </div>
+
+          <div class="input-box">
+            <label>Password:</label>
+            <input
+              type="password"
+              id="regPassword"
+              name="password"
+              placeholder="Password"
+              required
+            />
+            <i class="bx bxs-lock-alt"></i>
+          </div>
+
+          <button type="submit" class="btn-req" id="registerBtn">
+            Sign-Up
+          </button>
+        </form>
+      </div>
+
+      <!-- TOGGLE -->
+      <div class="toggle-box">
+        <div class="toggle-panel toggle-left">
+          <h1>Hello, Welcome!</h1>
+          <p>Don't have an account?</p>
+          <button class="btn-req register-btn" id="showRegister">
+            Sign-Up
+          </button>
+        </div>
+        <div class="toggle-panel toggle-right">
+          <h1>Welcome Back!</h1>
+          <p>Already have an account?</p>
+          <button class="btn-req login-btn" id="showLogin">Login</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="popup" class="popup-msg">
+      <span id="popupText"></span>
+    </div>
+
+    <script>
+      /* ================= POPUP ================= */
+      function showPopup(msg, success = true) {
+        const popup = document.getElementById("popup");
+        const text = document.getElementById("popupText");
+
+        popup.style.background = success
+          ? "linear-gradient(135deg,#22c55e,#16a34a)"
+          : "linear-gradient(135deg,#ef4444,#b91c1c)";
+
+        text.innerText = msg;
+        popup.classList.add("show");
+
+        setTimeout(() => popup.classList.remove("show"), 3000);
+      }
+
+      /* ================= LOGIN ================= */
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          fetch("/login", {
+            method: "POST",
+            body: new FormData(this),
+          })
+            .then((res) => res.text())
+            .then((result) => {
+              if (result === "invalid") {
+                showPopup("❌ Invalid username or password", false);
+              } else {
+                showPopup("✅ Login successful!");
+
+                localStorage.setItem("isLoggedIn", "true");
+                localStorage.setItem("username", loginUsername.value);
+                localStorage.setItem("role", result);
+
+                setTimeout(() => window.parent.location.reload(), 1500);
+              }
+            });
+        });
+
+      /* ================= REGISTER ================= */
+      document
+        .getElementById("registerForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const formData = new FormData();
+          formData.append("fullname", regFullName.value);
+          formData.append("username", regUsername.value);
+          formData.append("email", regEmail.value);
+          formData.append("password", regPassword.value);
+
+          fetch("/register", {
+            method: "POST",
+            body: formData,
+          })
+            .then((res) => res.text())
+            .then((result) => {
+              if (result === "exists") {
+                showPopup("⚠ Username already exists", false);
+              } else {
+                showPopup("🎉 Account created successfully!");
+
+                localStorage.setItem("isLoggedIn", "true");
+                localStorage.setItem("username", regUsername.value);
+                localStorage.setItem("role", "user");
+
+                setTimeout(() => window.parent.location.reload(), 1500);
+              }
+            });
+        });
+    </script>
+
+    <script src="{{ url_for('static', filename='js/modal.js') }}"></script>
+  </body>
+</html>

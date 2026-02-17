@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Bus Booking | Admin Panel</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='adminpanel.css') }}"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      .edit-popup {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+      }
+      .edit-box {
+        background: #fff;
+        padding: 25px;
+        border-radius: 12px;
+        width: 400px;
+        max-width: 95%;
+      }
+      .edit-box input {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+      }
+      .edit-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+      }
+      .edit-actions button {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        background: #ff7a00;
+        color: #fff;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <img
+        src="{{ url_for('static', filename='img/admin-logo.png') }}"
+        alt="Logo"
+        class="logo"
+      />
+      <h2>Admin-Panel</h2>
+      <a href="/adminpanel"
+        ><i class="fa fa-chart-line"></i>
+        <span data-lang="dashboard">Dashboard</span></a
+      >
+      <a href="/bus-booking" class="active"
+        ><i class="fa fa-bus"> </i>
+        <span data-lang="bus">Bus Booking</span>
+      </a>
+      <a href="/trucks-shipment"
+        ><i class="fa fa-truck"></i>
+        <span data-lang="truck">Trucks Shipment</span></a
+      >
+      <a href="/users"
+        ><i class="fa fa-users"></i>
+        <span data-lang="users">Manage Users</span></a
+      >
+      <a href="/queries"
+        ><i class="fa fa-message"></i>
+        <span data-lang="contact">Contact Queries</span></a
+      >
+      <a href="/logout"
+        ><i class="fa fa-right-from-bracket"></i>
+        <span data-lang="logout">Logout</span></a
+      >
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main">
+      <!-- TOP BAR -->
+      <div class="topbar">
+        <h1 data-lang="dashboard">Dashboard</h1>
+
+        <div class="top-controls">
+          <input type="text" id="tableSearch" placeholder="Search..." />
+          <i class="fa fa-bell"></i>
+
+          <div class="admin-menu">
+            <i class="fa fa-user"><span> Admin ▾</span></i>
+            <div class="admin-dropdown">
+              <a href="/profile"><i class="fa fa-user"></i> My Profile</a>
+              <a href="/mybookings"
+                ><i class="fa fa-briefcase"></i> My Bookings</a
+              >
+              <a href="/logout"
+                ><i class="fa fa-right-from-bracket"></i> Logout</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WELCOME -->
+      <div class="welcome-card">
+        <h2>🔰 Welcome to the Admin Dashboard 🔰</h2>
+        <p>
+          Manage all bookings, users, and revenue from one powerful control
+          panel
+        </p>
+      </div>
+
+      <!-- ================= BUS BOOKINGS ADMIN SECTION ================= -->
+      <section class="busadmin" id="busadmin">
+        <!-- Top Stats -->
+        <div class="busadmin__cards">
+          <div class="busadmin__card busadmin__card--revenue">
+            <h3>Total Bus Revenue</h3>
+            <h2>₹ <span id="busTotalRevenue">0</span></h2>
+            <p>Auto updates from bus payments</p>
+          </div>
+
+          <div class="busadmin__card busadmin__card--count">
+            <h3>Total Bus Bookings</h3>
+            <h2><span id="busTotalBookings">0</span></h2>
+            <p>Auto updates from bookings</p>
+          </div>
+        </div>
+
+        <h2 class="busadmin__title">All Booking across the platform</h2>
+
+        <!-- Table -->
+        <div class="busadmin__tableWrap">
+          <!-- ✅ FIXED: merged classes into ONE attribute (no other change) -->
+          <table class="busadmin__table search-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Username</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Distance (KM)</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Bus Type</th>
+                <th>Seater Type</th>
+                <th>Payment</th>
+                <th>Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="busBookingTable"></tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="busadmin__pagination" id="busPagination"></div>
+
+        <!-- ===== EDIT BOOKING POPUP ===== -->
+        <div id="editPopup" class="edit-popup" style="display: none">
+          <div class="edit-box">
+            <h3>Edit Booking</h3>
+
+            <input type="hidden" id="edit_id" />
+
+            <input id="edit_fullname" placeholder="Full Name" />
+            <input id="edit_email" placeholder="Email" />
+            <input id="edit_contact" placeholder="Contact" />
+            <input id="edit_distance" placeholder="Distance" />
+            <input id="edit_from" placeholder="From" />
+            <input id="edit_to" placeholder="To" />
+            <input id="edit_payment" placeholder="Payment" />
+
+            <div class="edit-actions">
+              <button onclick="saveEdit()">Save</button>
+              <button onclick="closeEdit()">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      /* ================= BUS ADMIN TABLE + PAGINATION + SEARCH ================= */
+      (function () {
+        const tbody = document.getElementById("busBookingTable");
+        const recentTbody = document.getElementById("busRecentTable");
+        const pag = document.getElementById("busPagination");
+
+        const totalRevenueEl = document.getElementById("busTotalRevenue");
+        const totalBookingsEl = document.getElementById("busTotalBookings");
+
+        const searchInput = document.getElementById("tableSearch");
+
+        let ALL = [];
+        const PER_PAGE = 10;
+        let page = 1;
+
+        // ✅ SEARCH KEY (filters across ALL data, not only current page)
+        let SEARCH_KEY = "";
+
+        function money(n) {
+          const x = Number(n || 0);
+          return x.toLocaleString("en-IN");
+        }
+
+        function safe(v) {
+          return v === undefined || v === null ? "" : String(v);
+        }
+
+        function getFilteredList() {
+          if (!SEARCH_KEY) return ALL;
+          const q = SEARCH_KEY.toLowerCase();
+          return ALL.filter((b) => JSON.stringify(b).toLowerCase().includes(q));
+        }
+
+        function renderPage() {
+          if (!tbody) return;
+          tbody.innerHTML = "";
+
+          const LIST = getFilteredList();
+
+          const start = (page - 1) * PER_PAGE;
+          const rows = LIST.slice(start, start + PER_PAGE);
+
+          if (rows.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="13" style="text-align:center;">No results found</td></tr>`;
+            renderPagination(LIST.length);
+            renderRecent5();
+            return;
+          }
+
+          rows.forEach((b, i) => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+              <td>${start + i + 1}</td>
+              <td>${safe(b.username)}</td>
+              <td>${safe(b.fullname)}</td>
+              <td>${safe(b.email)}</td>
+              <td>${safe(b.contact)}</td>
+              <td>${safe(b.distance)}</td>
+              <td>${safe(b.from)}</td>
+              <td>${safe(b.to)}</td>
+              <td>${safe(b.busType)}</td>
+              <td>${safe(b.seaterType)}</td>
+              <td>₹ ${money(b.payment)}</td>
+              <td>${safe(b.date)}</td>
+              <td>
+                <button onclick='openEdit(${JSON.stringify(b)})'>Edit</button>
+                <button onclick='deleteBooking("${safe(b.id)}")'>Delete</button>
+              </td>
+            `;
+            tbody.appendChild(tr);
+          });
+
+          renderPagination(LIST.length);
+          renderRecent5();
+        }
+
+        function renderRecent5() {
+          if (!recentTbody) return;
+          recentTbody.innerHTML = "";
+
+          const latest5 = ALL.slice(0, 5); // newest first from API
+          if (latest5.length === 0) {
+            recentTbody.innerHTML = `<tr><td colspan="5" style="text-align:center;">No bookings yet</td></tr>`;
+            return;
+          }
+
+          latest5.forEach((b) => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+              <td>${safe(b.username)}</td>
+              <td>${safe(b.busType)}</td>
+              <td>${safe(b.seaterType)}</td>
+              <td>₹ ${money(b.payment)}</td>
+              <td>${safe(b.date)}</td>
+            `;
+            recentTbody.appendChild(tr);
+          });
+        }
+
+        function renderPagination(totalItems) {
+          if (!pag) return;
+          pag.innerHTML = "";
+
+          const totalPages = Math.ceil((totalItems || 0) / PER_PAGE) || 1;
+
+          // ✅ if current page becomes invalid after search, reset to 1
+          if (page > totalPages) page = 1;
+
+          for (let p = 1; p <= totalPages; p++) {
+            const btn = document.createElement("button");
+            btn.textContent = p;
+            if (p === page) btn.classList.add("active");
+            btn.addEventListener("click", () => {
+              page = p;
+              renderPage();
+            });
+            pag.appendChild(btn);
+          }
+        }
+
+        async function load() {
+          try {
+            const res = await fetch("/api/bus-admin");
+            const data = await res.json();
+
+            // update counters
+            totalRevenueEl.textContent = money(data.total_revenue || 0);
+            totalBookingsEl.textContent = data.total_bookings || 0;
+
+            // bookings expected newest first
+            ALL = Array.isArray(data.bookings) ? data.bookings : [];
+            page = 1;
+            renderPage();
+          } catch (err) {
+            if (tbody) {
+              tbody.innerHTML = `<tr><td colspan="13" style="text-align:center;">Bus bookings API not connected</td></tr>`;
+            }
+          }
+        }
+
+        // ✅ SEARCH LISTENER (works with pagination)
+        if (searchInput) {
+          searchInput.addEventListener("input", function () {
+            SEARCH_KEY = this.value.trim();
+            page = 1;
+            renderPage();
+          });
+        }
+
+        load();
+      })();
+
+      function openEdit(b) {
+        document.getElementById("editPopup").style.display = "flex";
+
+        document.getElementById("edit_id").value = b.id || "";
+        document.getElementById("edit_fullname").value = b.fullname || "";
+        document.getElementById("edit_email").value = b.email || "";
+        document.getElementById("edit_contact").value = b.contact || "";
+        document.getElementById("edit_distance").value = b.distance || "";
+        document.getElementById("edit_from").value = b.from || "";
+        document.getElementById("edit_to").value = b.to || "";
+        document.getElementById("edit_payment").value = b.payment || "";
+      }
+
+      function closeEdit() {
+        document.getElementById("editPopup").style.display = "none";
+      }
+
+      async function saveEdit() {
+        const data = {
+          id: document.getElementById("edit_id").value,
+          fullname: document.getElementById("edit_fullname").value,
+          email: document.getElementById("edit_email").value,
+          contact: document.getElementById("edit_contact").value,
+          distance: document.getElementById("edit_distance").value,
+          from: document.getElementById("edit_from").value,
+          to: document.getElementById("edit_to").value,
+          payment: document.getElementById("edit_payment").value,
+        };
+
+        await fetch("/api/edit-bus-booking", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+
+        closeEdit();
+        location.reload();
+      }
+
+      async function deleteBooking(id) {
+        if (!confirm("Delete this booking?")) return;
+
+        await fetch("/api/delete-bus-booking/" + id, {
+          method: "DELETE",
+        });
+
+        location.reload();
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "TransportationService",
+        "name": "Gujarat Transport Solutions",
+        "url": "https://yourdomain.com",
+        "logo": "https://yourdomain.com/static/img/logo-gujrat.png",
+        "description": "Bus ticket booking and truck transport services across India.",
+        "areaServed": "India",
+        "serviceType": ["Bus Booking", "Truck Transport", "Cargo Delivery"],
+        "telephone": "+91-8976645502",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Transport Hub, Highway Road",
+          "addressLocality": "Ahmedabad",
+          "addressRegion": "Gujarat",
+          "postalCode": "700007",
+          "addressCountry": "IN"
+        }
+      }
+    </script>
+  </body>
+</html>
