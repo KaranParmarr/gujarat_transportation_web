@@ -1,0 +1,544 @@
+body {
+    margin: 0;
+    font-family: Segoe UI;
+    background: #f4f6fa;
+    display: flex;
+}
+
+img {
+    max-width: 200px;
+    height: auto;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 200px;
+    background: #0f172a;
+    color: white;
+    height: 100vh;
+    padding: 20px;
+    position: fixed;
+}
+
+.sidebar h2 {
+    text-align: center;
+}
+
+.sidebar a {
+    display: block;
+    padding: 14px;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    margin: 8px 0;
+}
+
+.sidebar a:hover,
+.sidebar .active {
+    background: #2563eb
+}
+
+/* Main */
+.main {
+    margin-left: 250px;
+    width: 100%;
+}
+
+/* Topbar */
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-controls {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.top-controls select,
+input {
+    padding: 8px 12px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+}
+
+/* Admin menu */
+.admin-menu {
+    position: relative;
+    cursor: pointer;
+}
+
+.admin-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 25px;
+    width:200px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .2);
+}
+
+.admin-menu:hover .admin-dropdown {
+    display: block;
+}
+
+.admin-dropdown a {
+    display: block;
+    padding: 12px;
+    color: #111;
+    text-decoration: none;
+}
+
+/* Welcome */
+.welcome-card {
+    background: white;
+    max-width: 1100px;
+    padding: 25px;
+    border-radius: 15px;
+    margin: 20px 0;
+}
+
+/* =========================
+   ADMIN STATS (Cards + Chart + Tables)
+   Works for: Desktop / Tablet / Android / iPhone
+   Paste into your adminpanel.css
+   ========================= */
+
+/* Layout wrapper */
+.cards {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    gap: 18px;
+    align-items: start;
+    justify-content: center;
+    grid-template-columns: repeat(12, 1fr);
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.card-wuser {
+    /* desktop: 4 cards in row */
+    background: #fff;
+    padding: 26px;
+    border-radius: 18px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .08);
+    transition: .3s;
+    border-left: 5px solid blue;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    cursor: pointer;
+}
+
+/* Stat Card */
+.card {
+    grid-column: span 3;
+    /* desktop: 4 cards in row */
+    background: #fff;
+    padding: 26px;
+    border-radius: 18px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .08);
+    transition: .3s;
+    border-left: 5px solid blue;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    cursor: pointer;
+}
+
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 34px rgba(2, 6, 23, 0.10);
+}
+
+.card i {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+    color: #fff;
+    flex: 0 0 44px;
+}
+
+.card h3 {
+    margin: 0;
+    font-size: 40px;
+    line-height: 1.15;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.card p {
+    margin: 4px 0 0;
+    font-size: 20px;
+    color: rgba(15, 23, 42, 0.70);
+    font-weight: 600;
+}
+
+/* Color Themes */
+.card.blue i {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+}
+
+.card.purple i {
+    background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+}
+
+.card.orange i {
+    background: linear-gradient(135deg, #f59e0b, #ea580c);
+}
+
+.card.green i {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+/* Chart Box */
+.chart-box {
+    grid-column: span 12;
+    background: #ffffff;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 10px 25px rgba(2, 6, 23, 0.06);
+    overflow: hidden;
+    min-height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chart-box canvas {
+    width: 100% !important;
+    height: 280px !important;
+    display: block;
+}
+
+/* Table Boxes */
+.table-box {
+    grid-column: span 6;
+    /* desktop: 2 tables side-by-side */
+    background: #ffffff;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 16px;
+    padding: 14px;
+    box-shadow: 0 10px 25px rgba(2, 6, 23, 0.06);
+    overflow: hidden;
+}
+
+.table-box h3 {
+    margin: 4px 4px 12px;
+    font-size: 16px;
+    font-weight: 800;
+    color: #004cff;
+}
+
+
+.table-box table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 620px;
+    /* helps avoid ugly squish; scrolls on phones */
+}
+
+.table-box th,
+.table-box td {
+    padding: 12px 10px;
+    text-align: left;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+    font-size: 13px;
+    color: rgba(15, 23, 42, 0.88);
+    white-space: nowrap;
+}
+
+.table-box th {
+    font-size: 12px;
+    letter-spacing: .3px;
+    text-transform: uppercase;
+    color: rgba(15, 23, 42, 0.65);
+    background: rgba(2, 6, 23, 0.02);
+}
+
+.table-box tr:hover td {
+    background: rgba(59, 130, 246, 0.04);
+}
+
+/* Revenue number styling */
+#totalRevenue {
+    font-weight: 900;
+}
+
+/* =========================
+   RESPONSIVE BREAKPOINTS
+   ========================= */
+
+/* Large tablets / small laptops */
+@media (max-width: 1024px) {
+    .card {
+        grid-column: span 6;
+    }
+
+    /* 2 cards per row */
+    .chart-box {
+        grid-column: span 12;
+    }
+
+    .table-box {
+        grid-column: span 12;
+    }
+
+    /* tables stack */
+    .chart-box {
+        min-height: 300px;
+    }
+
+    .chart-box canvas {
+        height: 260px !important;
+    }
+}
+
+/* Tablets / big phones */
+@media (max-width: 768px) {
+    .cards {
+        gap: 14px;
+        padding: 12px;
+    }
+
+    .card {
+        grid-column: span 12;
+        /* 1 card per row */
+        padding: 16px 14px;
+    }
+
+    .card h3 {
+        font-size: 20px;
+    }
+
+    .chart-box {
+        padding: 12px;
+    }
+
+    .chart-box canvas {
+        height: 240px !important;
+    }
+}
+
+/* iPhone / Android small screens */
+@media (max-width: 480px) {
+    .cards {
+        padding: 10px;
+    }
+
+    .card {
+        border-radius: 14px;
+        gap: 12px;
+    }
+
+    .card i {
+        width: 42px;
+        height: 42px;
+        border-radius: 13px;
+        font-size: 17px;
+    }
+
+    .card h3 {
+        font-size: 19px;
+    }
+
+    .card p {
+        font-size: 12px;
+    }
+
+    .table-box {
+        border-radius: 14px;
+        padding: 12px;
+    }
+
+    .table-box h3 {
+        font-size: 15px;
+    }
+
+    .chart-box {
+        border-radius: 14px;
+        min-height: 260px;
+    }
+
+    .chart-box canvas {
+        height: 220px !important;
+    }
+}
+
+/*==============================================
+=========================================
+==================================
+==============================
+===Bus booking Admin Panel====
+==================================
+=========================================
+================================================ */
+/* ================= BUS BOOKINGS ADMIN (busadmin) ================= */
+
+/* ROOT VARIABLES (match your style) */
+:root {
+    --primary: #ff7a00;
+    --bg: #f9fafb;
+    --card-bg: #ffffff;
+    --border: #e5e7eb;
+    --text-dark: #111827;
+    --text-light: #6b7280;
+}
+
+/* MAIN SECTION */
+.busadmin {
+    padding: 25px;
+    background: var(--bg);
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* TOP CARDS */
+.busadmin__cards {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.busadmin__card {
+    flex: 1;
+    min-width: 220px;
+    background: var(--card-bg);
+    padding: 22px;
+    border-radius: 14px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+    border-left: 5px solid var(--primary);
+}
+
+.busadmin__card h3 {
+    font-size: 15px;
+    color: var(--text-light);
+    margin-bottom: 8px;
+}
+
+.busadmin__card h2 {
+    font-size: 28px;
+    color: var(--text-dark);
+    margin: 0;
+}
+
+.busadmin__card p {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--text-light);
+}
+
+/* TABLE TITLE */
+.busadmin__title {
+    font-size: 20px;
+    margin: 15px 0;
+    color: var(--text-dark);
+}
+
+/* TABLE WRAPPER */
+.busadmin__tableWrap {
+    background: white;
+    border-radius: 12px;
+    overflow-x: auto;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* TABLE */
+.busadmin__table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 900px;
+}
+
+.busadmin__table thead {
+    background: var(--primary);
+    color: white;
+}
+
+.busadmin__table thead th {
+    padding: 14px 12px;
+    text-align: left;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.busadmin__table tbody td {
+    padding: 12px;
+    font-size: 13px;
+    color: var(--text-dark);
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+}
+
+.busadmin__table tbody tr:hover {
+    background: #fff7ed;
+}
+
+/* PAGINATION */
+.busadmin__pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.busadmin__pagination button {
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: none;
+    background: var(--primary);
+    color: white;
+    cursor: pointer;
+}
+
+.busadmin__pagination button.active {
+    background: black;
+}
+
+/* MOBILE (Android + iPhone) */
+@media (max-width:768px) {
+    .busadmin__cards {
+        flex-direction: column;
+    }
+
+    .busadmin__card h2 {
+        font-size: 22px;
+    }
+
+    .busadmin__title {
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .busadmin {
+        padding: 15px;
+    }
+}
+
+/* TABLET */
+@media (min-width:601px) and (max-width:992px) {
+    .busadmin__card h2 {
+        font-size: 24px;
+    }
+}
+
+/* LARGE DESKTOP */
+@media (min-width:1200px) {
+    .busadmin {
+        max-width: 1400px;
+        margin: auto;
+    }
+}

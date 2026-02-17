@@ -1,0 +1,1251 @@
+/* =========================
+   STRICT MOBILE BOTTOM NAV
+========================= */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 62px;
+    background: #ffffff;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 9999;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Items */
+.bottom-nav__item {
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+    color: #555;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    transition: all 0.25s ease;
+}
+
+.bottom-nav__item i {
+    font-size: 18px;
+}
+
+/* Active / Hover */
+.bottom-nav__item:hover,
+.bottom-nav__item.active {
+    color: #ff7a00;
+}
+
+/* Prevent content hiding behind nav */
+body {
+    padding-bottom: 70px;
+}
+
+/* 📱 MOBILE ONLY */
+@media (min-width: 992px) {
+    .bottom-nav {
+        display: none;
+    }
+
+    body {
+        padding-bottom: 0;
+    }
+}
+
+/* =========================================================
+   ✅ FINAL CLEAN RESPONSIVE CSS (Perfect Alignment)
+   Android + iPhone + Tablet + Desktop
+   - No margin-left hacks
+   - Hero text always centered
+   - Truck booking grid adapts perfectly
+   - Truck FAQ + Bus Booking + Bus FAQ included
+========================================================= */
+
+/* =========================
+   1) GLOBAL RESET + TOKENS
+========================= */
+:root {
+    --primary: #d84e55;
+    --bg: #f4f7f8;
+    --dark: #0f172a;
+
+    --container: 1120px;
+    --radius: 16px;
+
+    --shadow: 0 12px 32px rgba(15, 23, 42, .10);
+    --shadow-lg: 0 20px 60px rgba(0, 0, 0, .14);
+
+    --text: #0e1220;
+    --muted: #64748b;
+
+    --blue: #0030f2;
+    --green: #09f605;
+
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f7f6;
+    color: var(--text);
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+/* helper container (optional use in HTML) */
+.container {
+    width: 100%;
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+/* =========================
+   2) HERO (Perfect center)
+========================= */
+.hero {
+    width: 100%;
+    background: cadetblue;
+    padding: clamp(42px, 6vw, 78px) 16px;
+}
+
+.hero-container {
+    width: 100%;
+    max-width: var(--container);
+    margin: 0 auto;
+}
+
+.hero-content {
+    text-align: center;
+    padding: 10px;
+}
+
+.hero-content h2 {
+    font-size: clamp(22px, 2.6vw, 34px);
+    color: rgb(128, 9, 240);
+    font-weight: 900;
+    letter-spacing: .2px;
+}
+
+.hero-content p {
+    margin-top: 8px;
+    color: #b4f904;
+    font-size: clamp(14px, 1.4vw, 16px);
+    font-weight: 700;
+}
+
+/* =========================
+   3) TRUCK BOOKING SECTION
+   Perfect grid responsive
+========================= */
+#truck-booking-section {
+    background: #f8fafc;
+    padding: clamp(34px, 6vw, 70px) 16px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.truck-wrapper {
+    width: 100%;
+    max-width: 1000px;
+    background: #fff;
+    padding: clamp(18px, 3.5vw, 42px);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+/* Title + subtitle */
+.truck-wrapper h2 {
+    text-align: center;
+    font-size: clamp(20px, 2.2vw, 28px);
+    color: var(--dark);
+    margin: 0 0 8px;
+    font-weight: 900;
+}
+
+.truck-wrapper p {
+    text-align: center;
+    margin: 0 0 26px;
+    color: var(--muted);
+    font-size: clamp(13px, 1.3vw, 15px);
+}
+
+/* Grid */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    width: 100%;
+}
+
+/* Fields */
+.field {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.field label {
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: var(--dark);
+    font-weight: 800;
+}
+
+.field input,
+.field select {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid #cbd5e1;
+    background: #fff;
+    font-size: 14px;
+    outline: none;
+    transition: border-color .2s ease, box-shadow .2s ease, transform .12s ease;
+}
+
+.field input:focus,
+.field select:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(0, 48, 242, .12);
+}
+
+/* Price box */
+.price-box {
+    margin-top: 22px;
+    padding: 14px;
+    text-align: center;
+    font-size: clamp(18px, 2vw, 22px);
+    border-radius: 12px;
+    background: #fff1f2;
+    color: #e11d48;
+    font-weight: 900;
+}
+
+/* Button (always centered) */
+.btn-pay {
+    margin-top: 18px;
+    width: min(360px, 100%);
+    padding: 14px 16px;
+    background: var(--blue);
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 14px;
+    cursor: pointer;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    transition: transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+    box-shadow: 0 14px 30px rgba(0, 48, 242, .18);
+}
+
+.btn-pay:hover {
+    transform: translateY(-1px);
+    background: var(--green);
+    color: #0f172a;
+}
+
+/* ✅ TABLET: 3 -> 2 */
+@media (max-width: 992px) {
+    .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+}
+
+/* ✅ MOBILE: 2 -> 1 */
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+}
+
+/* ✅ SMALL MOBILE (iPhone SE / small Android) */
+@media (max-width: 420px) {
+    .truck-wrapper {
+        border-radius: 14px;
+    }
+
+    .price-box {
+        padding: 12px;
+    }
+}
+
+/* =========================
+   4) TRUCK FAQ (Unique BG)
+========================= */
+.truckfaq {
+    padding: clamp(70px, 7vw, 112px) 16px;
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(1100px 520px at 12% 12%, rgba(68, 0, 255, .16), transparent 60%),
+        radial-gradient(900px 520px at 88% 14%, rgba(42, 251, 1, .16), transparent 50%),
+        radial-gradient(900px 520px at 50% 120%, rgba(241, 1, 1, .12), transparent 50%),
+        linear-gradient(180deg, #0091ff 0%, #b1048e 100%);
+    color: #eef3ff;
+}
+
+.truckfaq::before,
+.truckfaq::after {
+    content: "";
+    position: absolute;
+    width: 520px;
+    height: 520px;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: .25;
+    pointer-events: none;
+}
+
+.truckfaq::before {
+    left: -180px;
+    top: -160px;
+    background: #00ffd1;
+}
+
+.truckfaq::after {
+    right: -180px;
+    top: -150px;
+    background: #ff487e;
+}
+
+.truckfaq__container {
+    max-width: 1120px;
+    margin: 0 auto;
+}
+
+.truckfaq__header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.truckfaq__title {
+    margin: 0 0 10px;
+    font-size: clamp(1.9rem, 3vw, 2.9rem);
+    font-weight: 900;
+    text-shadow: 0 18px 44px rgba(0, 0, 0, .45);
+}
+
+.truckfaq__subtitle {
+    max-width: 860px;
+    margin: 0 auto;
+    color: rgba(238, 243, 255, .80);
+    line-height: 1.75;
+    font-size: 1.02rem;
+}
+
+/* Grid */
+.truckfaq__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 24px;
+}
+
+/* Card */
+.truckfaq__item {
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, .14);
+    background: rgba(255, 255, 255, .06);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 18px 60px rgba(0, 0, 0, .35);
+    transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.truckfaq__item:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, .22);
+    box-shadow: 0 28px 90px rgba(0, 0, 0, .50),
+        0 0 42px color-mix(in srgb, var(--glow) 60%, transparent);
+}
+
+.truckfaq__item.is-open {
+    border-color: color-mix(in srgb, var(--glow) 55%, rgba(255, 255, 255, .18));
+    box-shadow: 0 28px 96px rgba(0, 0, 0, .55),
+        0 0 54px color-mix(in srgb, var(--glow) 70%, transparent);
+}
+
+/* Header bar */
+.truckfaq__q {
+    margin: 0;
+    padding: 0;
+    background: var(--qbg);
+    border-bottom: 1px solid rgba(255, 255, 255, .14);
+    position: relative;
+}
+
+.truckfaq__q::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(600px 120px at 20% 0%, rgba(255, 255, 255, .14), transparent 60%),
+        radial-gradient(500px 120px at 80% 0%, rgba(255, 255, 255, .10), transparent 65%);
+    pointer-events: none;
+}
+
+/* Button row */
+.truckfaq__btn {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 16px 18px;
+    text-align: left;
+    font-weight: 900;
+    font-size: 1.02rem;
+    letter-spacing: .2px;
+    color: var(--qtext);
+    transition: color 220ms ease, text-shadow 220ms ease;
+}
+
+.truckfaq__item:hover .truckfaq__btn {
+    color: #fff;
+    text-shadow: 0 0 18px color-mix(in srgb, var(--glow) 65%, transparent);
+}
+
+.truckfaq__btn:focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--glow) 70%, white);
+    outline-offset: 3px;
+    border-radius: 14px;
+}
+
+/* Icon */
+.truckfaq__icon {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 auto;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, .16);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, .12);
+    position: relative;
+    transition: transform 220ms ease, box-shadow 220ms ease, background 220ms ease;
+}
+
+.truckfaq__icon::before,
+.truckfaq__icon::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 12px;
+    height: 2px;
+    background: rgba(255, 255, 255, .92);
+    transform: translate(-50%, -50%);
+    border-radius: 99px;
+}
+
+.truckfaq__icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.truckfaq__item.is-open .truckfaq__icon {
+    transform: rotate(45deg);
+}
+
+.truckfaq__a {
+    padding: 0 18px 16px;
+    line-height: 1.75;
+    font-size: .98rem;
+    color: rgba(238, 243, 255, .84);
+    background: linear-gradient(180deg, rgba(255, 255, 255, .06) 0%, rgba(255, 255, 255, .04) 100%);
+}
+
+/* Unique h2 colors (c1..c20) */
+.truckfaq__q.c1 {
+    --qbg: linear-gradient(135deg, #ff7a18 0%, #ff3d77 100%);
+    --qtext: #1a0b05;
+    --glow: #ff7a18;
+}
+
+.truckfaq__q.c2 {
+    --qbg: linear-gradient(135deg, #ff3d77 0%, #8b5cf6 100%);
+    --qtext: #160411;
+    --glow: #ff3d77;
+}
+
+.truckfaq__q.c3 {
+    --qbg: linear-gradient(135deg, #2be7ff 0%, #60a5fa 100%);
+    --qtext: #06121b;
+    --glow: #2be7ff;
+}
+
+.truckfaq__q.c4 {
+    --qbg: linear-gradient(135deg, #8b5cf6 0%, #22d3ee 100%);
+    --qtext: #0b061a;
+    --glow: #8b5cf6;
+}
+
+.truckfaq__q.c5 {
+    --qbg: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
+    --qtext: #04120a;
+    --glow: #22c55e;
+}
+
+.truckfaq__q.c6 {
+    --qbg: linear-gradient(135deg, #f59e0b 0%, #fb7185 100%);
+    --qtext: #1a1103;
+    --glow: #f59e0b;
+}
+
+.truckfaq__q.c7 {
+    --qbg: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+    --qtext: #071126;
+    --glow: #60a5fa;
+}
+
+.truckfaq__q.c8 {
+    --qbg: linear-gradient(135deg, #f472b6 0%, #fb7185 100%);
+    --qtext: #1a0612;
+    --glow: #f472b6;
+}
+
+.truckfaq__q.c9 {
+    --qbg: linear-gradient(135deg, #34d399 0%, #22d3ee 100%);
+    --qtext: #041419;
+    --glow: #34d399;
+}
+
+.truckfaq__q.c10 {
+    --qbg: linear-gradient(135deg, #a78bfa 0%, #60a5fa 100%);
+    --qtext: #0e0822;
+    --glow: #a78bfa;
+}
+
+.truckfaq__q.c11 {
+    --qbg: linear-gradient(135deg, #fb7185 0%, #f97316 100%);
+    --qtext: #1b0607;
+    --glow: #fb7185;
+}
+
+.truckfaq__q.c12 {
+    --qbg: linear-gradient(135deg, #93c5fd 0%, #2be7ff 100%);
+    --qtext: #06111d;
+    --glow: #93c5fd;
+}
+
+.truckfaq__q.c13 {
+    --qbg: linear-gradient(135deg, #fbbf24 0%, #34d399 100%);
+    --qtext: #1a1204;
+    --glow: #fbbf24;
+}
+
+.truckfaq__q.c14 {
+    --qbg: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+    --qtext: #06120b;
+    --glow: #4ade80;
+}
+
+.truckfaq__q.c15 {
+    --qbg: linear-gradient(135deg, #38bdf8 0%, #c084fc 100%);
+    --qtext: #06131a;
+    --glow: #38bdf8;
+}
+
+.truckfaq__q.c16 {
+    --qbg: linear-gradient(135deg, #c084fc 0%, #ff3d77 100%);
+    --qtext: #14051a;
+    --glow: #c084fc;
+}
+
+.truckfaq__q.c17 {
+    --qbg: linear-gradient(135deg, #fda4af 0%, #fbbf24 100%);
+    --qtext: #1a0810;
+    --glow: #fda4af;
+}
+
+.truckfaq__q.c18 {
+    --qbg: linear-gradient(135deg, #22d3ee 0%, #60a5fa 100%);
+    --qtext: #061318;
+    --glow: #22d3ee;
+}
+
+.truckfaq__q.c19 {
+    --qbg: linear-gradient(135deg, #f97316 0%, #ff7a18 100%);
+    --qtext: #1a1005;
+    --glow: #f97316;
+}
+
+.truckfaq__q.c20 {
+    --qbg: linear-gradient(135deg, #10b981 0%, #2be7ff 100%);
+    --qtext: #04140f;
+    --glow: #10b981;
+}
+
+/* readability on bright headers */
+.truckfaq__q.c3 .truckfaq__btn,
+.truckfaq__q.c7 .truckfaq__btn,
+.truckfaq__q.c10 .truckfaq__btn,
+.truckfaq__q.c12 .truckfaq__btn,
+.truckfaq__q.c15 .truckfaq__btn,
+.truckfaq__q.c18 .truckfaq__btn,
+.truckfaq__q.c20 .truckfaq__btn {
+    color: #081326;
+    text-shadow: none;
+}
+
+/* Truck FAQ responsive */
+@media (max-width:420px) {
+    .truckfaq {
+        padding: 74px 14px;
+    }
+
+    .truckfaq__btn {
+        padding: 14px 14px;
+        font-size: .98rem;
+    }
+
+    .truckfaq__a {
+        padding: 0 14px 14px;
+        font-size: .95rem;
+    }
+}
+
+@media (min-width:1200px) {
+    .truckfaq__grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+    }
+
+    .truckfaq__item {
+        border-radius: 20px;
+    }
+
+    .truckfaq__btn {
+        padding: 18px 22px;
+        font-size: 1.06rem;
+    }
+
+    .truckfaq__a {
+        padding: 0 22px 18px;
+    }
+}
+
+/* =========================
+   5) BUS BOOKING (Unique BG)
+========================= */
+.busbook {
+    padding: clamp(72px, 7vw, 110px) 16px;
+    background:
+        radial-gradient(900px 420px at 12% 10%, rgba(255, 122, 24, .18), transparent 60%),
+        radial-gradient(900px 420px at 88% 12%, rgba(34, 211, 238, .16), transparent 60%),
+        linear-gradient(180deg, #06121d 0%, #02060b 100%);
+    color: #eef5ff;
+    overflow: hidden;
+}
+
+.busbook__wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.busbook__head {
+    text-align: center;
+    margin-bottom: 26px;
+}
+
+.busbook__badge {
+    display: inline-flex;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .10);
+    border: 1px solid rgba(255, 255, 255, .16);
+    color: rgba(238, 245, 255, .86);
+    font-weight: 800;
+    letter-spacing: .4px;
+    margin-bottom: 10px;
+}
+
+.busbook__title {
+    margin: 0 0 10px;
+    font-size: clamp(1.9rem, 3vw, 3rem);
+    font-weight: 900;
+}
+
+.busbook__sub {
+    margin: 0 auto;
+    max-width: 840px;
+    color: rgba(238, 245, 255, .82);
+    line-height: 1.75;
+}
+
+/* ✅ Correct responsive: mobile 1 column, desktop 2 columns */
+.busbook__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 26px;
+    align-items: start;
+}
+
+@media (min-width: 900px) {
+    .busbook__grid {
+        grid-template-columns: 1.2fr .8fr;
+        gap: 18px;
+    }
+}
+
+/* Cards */
+.busbook__card {
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, .14);
+    background: rgba(255, 255, 255, .06);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 18px 60px rgba(0, 0, 0, .40);
+    overflow: hidden;
+    position: relative;
+}
+
+.busbook__card--form {
+    animation: busSlideLeft 650ms ease both;
+}
+
+.busbook__card--summary {
+    animation: busSlideRight 650ms ease both;
+}
+
+@keyframes busSlideLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-38px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes busSlideRight {
+    from {
+        opacity: 0;
+        transform: translateX(38px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* titles */
+.busbook__cardTitle {
+    margin: 0;
+    padding: 16px 18px;
+    font-size: 1.1rem;
+    font-weight: 900;
+    border-bottom: 1px solid rgba(255, 255, 255, .12);
+    background: radial-gradient(700px 120px at 20% 0%, rgba(255, 255, 255, .12), transparent 60%);
+}
+
+/* Form */
+#busBookingForm {
+    padding: 16px 18px 18px;
+}
+
+.busbook__row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+@media (min-width: 620px) {
+    .busbook__row {
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+    }
+}
+
+.busbook__field label {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: .92rem;
+    font-weight: 800;
+    color: rgba(238, 245, 255, .92);
+    margin-bottom: 6px;
+}
+
+.busbook__field label span {
+    color: #ff6b6b;
+    font-weight: 900;
+}
+
+.busbook__field input,
+.busbook__field select {
+    width: 100%;
+    height: 46px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, .14);
+    background: rgba(0, 0, 0, .18);
+    color: #eef5ff;
+    padding: 0 12px;
+    outline: none;
+    transition: box-shadow 200ms ease, border-color 200ms ease;
+}
+
+.busbook__field input:focus,
+.busbook__field select:focus {
+    border-color: rgba(34, 211, 238, .6);
+    box-shadow: 0 0 0 4px rgba(34, 211, 238, .18);
+}
+
+.busbook__hint {
+    display: block;
+    margin-top: 6px;
+    font-size: .82rem;
+    color: rgba(238, 245, 255, .72);
+    line-height: 1.35;
+}
+
+.busbook__total .busbook__amount {
+    height: 46px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, .14);
+    background: rgba(255, 255, 255, .08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 900;
+    letter-spacing: .4px;
+    color: #fff;
+}
+
+/* Buttons */
+.busbook__actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+@media (min-width: 620px) {
+    .busbook__actions {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.busbook__ghost,
+.busbook__pay {
+    height: 48px;
+    border-radius: 999px;
+    border: 0;
+    cursor: pointer;
+    font-weight: 900;
+    transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+}
+
+.busbook__ghost {
+    background: rgba(255, 255, 255, .12);
+    color: rgba(238, 245, 255, .95);
+    border: 1px solid rgba(255, 255, 255, .16);
+}
+
+.busbook__pay {
+    background: linear-gradient(135deg, #ff7a18 0%, #ff3d77 100%);
+    color: #10060a;
+    box-shadow: 0 16px 45px rgba(255, 61, 119, .22);
+}
+
+.busbook__ghost:hover,
+.busbook__pay:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.03);
+    box-shadow: 0 0 28px rgba(255, 255, 255, .12), 0 0 38px rgba(255, 122, 24, .22);
+}
+
+.busbook__notice {
+    margin-top: 12px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, .07);
+    border: 1px dashed rgba(255, 255, 255, .18);
+    color: rgba(238, 245, 255, .82);
+    font-size: .9rem;
+    line-height: 1.5;
+    min-height: 20px;
+}
+
+/* Summary */
+.busbook__rules {
+    padding: 16px 18px 18px;
+    display: grid;
+    gap: 12px;
+}
+
+.busbook__rule {
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, .12);
+    background: rgba(0, 0, 0, .16);
+    padding: 12px 14px;
+    transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+
+.busbook__rule:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, .20);
+    box-shadow: 0 0 40px rgba(34, 211, 238, .14);
+}
+
+.busbook__rule h3 {
+    margin: 0 0 8px;
+    font-size: 1rem;
+    font-weight: 900;
+}
+
+.busbook__rule ul {
+    margin: 0;
+    padding-left: 18px;
+    color: rgba(238, 245, 255, .86);
+    line-height: 1.65;
+}
+
+.busbook__rule--note {
+    background: rgba(255, 255, 255, .08);
+}
+
+@media (min-width:1025px) {
+    .busbook__cardTitle {
+        padding: 18px 22px;
+    }
+
+    #busBookingForm {
+        padding: 18px 22px 22px;
+    }
+
+    .busbook__rules {
+        padding: 18px 22px 22px;
+    }
+}
+
+/* =========================
+   6) BUS FAQ (White section)
+========================= */
+.busfaq {
+    padding: clamp(74px, 7vw, 110px) 16px;
+    background:
+        radial-gradient(800px 340px at 10% 0%, rgba(255, 122, 24, .10), transparent 60%),
+        radial-gradient(800px 340px at 90% 0%, rgba(34, 211, 238, .10), transparent 60%),
+        linear-gradient(180deg, #ffffff 0%, #f6f7fb 100%);
+    color: #0e1220;
+}
+
+.busfaq__container {
+    max-width: 1120px;
+    margin: 0 auto;
+}
+
+.busfaq__header {
+    text-align: center;
+    margin-bottom: 26px;
+}
+
+.busfaq__title {
+    margin: 0 0 10px;
+    font-size: clamp(1.8rem, 3vw, 2.7rem);
+    font-weight: 1000;
+    letter-spacing: .2px;
+    color: #0b1324;
+}
+
+.busfaq__subtitle {
+    max-width: 860px;
+    margin: 0 auto;
+    color: rgba(14, 18, 32, .78);
+    line-height: 1.75;
+}
+
+/* Grid */
+.busfaq__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 20px;
+}
+
+/* ✅ Tablet/Desktop -> 2 columns */
+@media (min-width: 820px) {
+    .busfaq__grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+    }
+}
+
+/* Card */
+.busfaq__item {
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(20, 30, 55, .10);
+    background: #fff;
+    box-shadow: 0 20px 60px rgba(15, 23, 42, .10);
+    transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.busfaq__item:hover {
+    transform: translateY(-3px);
+    border-color: rgba(20, 30, 55, .16);
+    box-shadow: 0 30px 90px rgba(15, 23, 42, .16),
+        0 0 46px color-mix(in srgb, var(--glow) 40%, transparent);
+}
+
+.busfaq__item.is-open {
+    border-color: color-mix(in srgb, var(--glow) 55%, rgba(20, 30, 55, .18));
+    box-shadow: 0 30px 95px rgba(15, 23, 42, .18),
+        0 0 56px color-mix(in srgb, var(--glow) 55%, transparent);
+}
+
+/* header */
+.busfaq__q {
+    margin: 0;
+    background: var(--qbg);
+    border-bottom: 1px solid rgba(20, 30, 55, .08);
+}
+
+.busfaq__btn {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+
+    padding: 16px 18px;
+    text-align: left;
+
+    font-weight: 1000;
+    font-size: 1.02rem;
+    letter-spacing: .2px;
+    color: var(--qtext);
+
+    transition: text-shadow 220ms ease;
+}
+
+.busfaq__item:hover .busfaq__btn {
+    text-shadow: 0 0 18px color-mix(in srgb, var(--glow) 60%, transparent);
+}
+
+.busfaq__btn:focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--glow) 60%, white);
+    outline-offset: 3px;
+    border-radius: 14px;
+}
+
+/* icon */
+.busfaq__icon {
+    width: 18px;
+    height: 18px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, .08);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .08);
+    position: relative;
+    transition: transform 220ms ease, box-shadow 220ms ease, background 220ms ease;
+    flex: 0 0 auto;
+}
+
+.busfaq__icon::before,
+.busfaq__icon::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 12px;
+    height: 2px;
+    background: rgba(0, 0, 0, .78);
+    transform: translate(-50%, -50%);
+    border-radius: 99px;
+}
+
+.busfaq__icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.busfaq__item.is-open .busfaq__icon {
+    transform: rotate(45deg);
+    background: color-mix(in srgb, var(--glow) 18%, rgba(0, 0, 0, .08));
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--glow) 30%, rgba(0, 0, 0, .10)),
+        0 0 20px color-mix(in srgb, var(--glow) 45%, transparent);
+}
+
+/* answer */
+.busfaq__a {
+    padding: 0 18px 16px;
+    line-height: 1.75;
+    font-size: .98rem;
+    color: rgba(14, 18, 32, .82);
+    background: linear-gradient(180deg, #fff 0%, #f6f7fb 100%);
+}
+
+/* Unique colors per FAQ header */
+.busfaq__q.f1 {
+    --qbg: linear-gradient(135deg, #fff3e8, #ffe1ee);
+    --qtext: #7a2f00;
+    --glow: #ff7a18;
+}
+
+.busfaq__q.f2 {
+    --qbg: linear-gradient(135deg, #eaf6ff, #e9f1ff);
+    --qtext: #0b3a7a;
+    --glow: #2b8cff;
+}
+
+.busfaq__q.f3 {
+    --qbg: linear-gradient(135deg, #f2fffa, #e9fff2);
+    --qtext: #0a5a3a;
+    --glow: #22c55e;
+}
+
+.busfaq__q.f4 {
+    --qbg: linear-gradient(135deg, #f6f0ff, #efe6ff);
+    --qtext: #4a1db1;
+    --glow: #8b5cf6;
+}
+
+.busfaq__q.f5 {
+    --qbg: linear-gradient(135deg, #fff5f7, #ffe8ef);
+    --qtext: #8a0d3c;
+    --glow: #fb7185;
+}
+
+.busfaq__q.f6 {
+    --qbg: linear-gradient(135deg, #fffbe9, #fff1c7);
+    --qtext: #6b4b00;
+    --glow: #f59e0b;
+}
+
+.busfaq__q.f7 {
+    --qbg: linear-gradient(135deg, #eef9ff, #dff6ff);
+    --qtext: #045c7a;
+    --glow: #22d3ee;
+}
+
+.busfaq__q.f8 {
+    --qbg: linear-gradient(135deg, #f4fff0, #e7ffe0);
+    --qtext: #2f6a00;
+    --glow: #4ade80;
+}
+
+.busfaq__q.f9 {
+    --qbg: linear-gradient(135deg, #f1f7ff, #e7eeff);
+    --qtext: #1e3a8a;
+    --glow: #60a5fa;
+}
+
+.busfaq__q.f10 {
+    --qbg: linear-gradient(135deg, #fff0f7, #ffe1f1);
+    --qtext: #7a124f;
+    --glow: #f472b6;
+}
+
+.busfaq__q.f11 {
+    --qbg: linear-gradient(135deg, #f0fffe, #dffffa);
+    --qtext: #065f5b;
+    --glow: #2be7ff;
+}
+
+.busfaq__q.f12 {
+    --qbg: linear-gradient(135deg, #fff3ee, #ffe6da);
+    --qtext: #7a2b10;
+    --glow: #f97316;
+}
+
+.busfaq__q.f13 {
+    --qbg: linear-gradient(135deg, #f3fffb, #e0fff2);
+    --qtext: #0b5a45;
+    --glow: #10b981;
+}
+
+.busfaq__q.f14 {
+    --qbg: linear-gradient(135deg, #f7f2ff, #efe8ff);
+    --qtext: #4c1d95;
+    --glow: #c084fc;
+}
+
+.busfaq__q.f15 {
+    --qbg: linear-gradient(135deg, #f5fbff, #e9f6ff);
+    --qtext: #0b4a7a;
+    --glow: #38bdf8;
+}
+
+.busfaq__q.f16 {
+    --qbg: linear-gradient(135deg, #fff7ea, #ffeec9);
+    --qtext: #6b3f00;
+    --glow: #fbbf24;
+}
+
+.busfaq__q.f17 {
+    --qbg: linear-gradient(135deg, #eefcf6, #defbea);
+    --qtext: #065f46;
+    --glow: #34d399;
+}
+
+.busfaq__q.f18 {
+    --qbg: linear-gradient(135deg, #f2f7ff, #e8efff);
+    --qtext: #1d3b8a;
+    --glow: #a78bfa;
+}
+
+/* Small phones spacing */
+@media (max-width:420px) {
+    .busfaq {
+        padding: 74px 14px;
+    }
+
+    .busfaq__btn {
+        padding: 14px 14px;
+        font-size: .98rem;
+    }
+
+    .busfaq__a {
+        padding: 0 14px 14px;
+        font-size: .95rem;
+    }
+}
