@@ -6,6 +6,8 @@ Gujarat Transportation is a comprehensive web application built with Flask that 
 
 The website connects major business corridors in Gujarat, including Ahmedabad, Surat, Vadodara, Rajkot, and industrial zones in Kutch, while also supporting nationwide transportation services.
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/35ec9169-ab0f-43d6-a427-c7b8f98e0f68/deploy-status)](https://app.netlify.com/projects/gujarattranspotation/deploys)
+
 ## Features
 
 ### Core Services
