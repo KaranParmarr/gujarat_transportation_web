@@ -256,4 +256,4 @@ For inquiries or support:
 - Built with a focus on safety, reliability, and customer satisfaction
 - Serving Gujarat's transportation needs for over 15 years
 - Committed to environmental responsibility and modern fleet management
-- Special thanks to all partners and customers for their continued support
+- Special thanks to all partners and customers for their continued support.
